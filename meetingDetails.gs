@@ -1,9 +1,43 @@
+function replaceWithBold(pattern, newString) {
+  var body = DocumentApp.getActiveDocument().getBody();
+  var found = body.findText(pattern);
+  while (found) {
+    var elem = found.getElement();
+    if (found.isPartial()) {
+      var start = found.getStartOffset();
+      var end = found.getEndOffsetInclusive();
+      elem.setBold(start, end, true);
+    }
+    else {
+      elem.setBold(true);
+    }
+    found = body.findText(pattern, newString);
+  }
+  body.replaceText(pattern, newString);
+}
+
+
 
 function replaceText(){
   
   //code for button to replace text based on details
+  var doc = DocumentApp.getActiveDocument().getBody();
+  var found = doc.findText("{Meeting_Location}");
+  var elem = found.getElement();
+  found.setForegroundColor("#000000");
+    
   
-}
+    
+  //var doc = DocumentApp.getActiveDocument().getBody();
+  //var meeting = {
+  //  location: 'Zooooom!'
+  //var found = doc.findText("{meeting_location}");
+  //doc.replaceText('{meeting_location}', meeting.location);  
+ 
+  
+  
+  
+};
 
 function onOpen(e){ 
   DocumentApp.getUi()
