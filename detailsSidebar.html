@@ -17,22 +17,7 @@ TODO: Create a separate place to put information to reduce hardcode
         line-height: 1.5;
         font-family: Verdana;
       }
-         
-      form {
-        overflow: hidden;
-      }
  
-      label {
-        float: left;
-        width: 200px;
-        padding-right: 24px;
-      }
- 
-      input {
-        float: left;
-        width: calc(100% - 200px);
-      }
-      
       output {  
         font-size: 200%; 
         font-family: Helvetica Neue,Helvetica,Arial,sans-serif; 
@@ -62,6 +47,12 @@ TODO: Create a separate place to put information to reduce hardcode
         border-color: #c3d5d8;
        }
        
+      .flex-inner {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      
     </style>
   </head>
   <body> 
@@ -119,21 +110,37 @@ TODO: Create a separate place to put information to reduce hardcode
       </div>
         
       <div class="dataInput">
-        <label>Present:</label><br>
-        <input type="checkbox" id="president" name="president" value="president">
-        <label for="president">President</label>
-        <input type="checkbox" id="education" name="education" value="education">
-        <label for="education">VP of Education </label><br>
-        <input type="checkbox" id="membership" name="membership" value="membership">
-        <label for="membership">VP of Membership</label>
-        <input type="checkbox" id="pr" name="pr" value="pr">
-        <label for="pr">VP of PR</label><br>
-        <input type="checkbox" id="treasurer" name="treasurer" value="treasurer">
-        <label for="treasurer">Treasurer</label>
-        <input type="checkbox" id="saa" name="saa" value="saa">
-        <label for="pr">SAA</label><br>
-        <input type="checkbox" id="secretary" name="secretary" value="secretary">
-        <label for="pr">Secretary</label><br>
+        <label>Present:</label><br>  
+        <ul class="flex-inner" style="list-style-type:none;">
+          <li>
+            <input type="checkbox" id="president" name="president" value="president">
+            <label for="president">President</label>
+          </li>
+          <li>
+            <input type="checkbox" id="education" name="education" value="education">
+            <label for="education">VP of Edu. </label><br>
+          </li>
+          <li>
+            <input type="checkbox" id="membership" name="membership" value="membership">
+            <label for="membership">VP of Mem.</label>
+          </li>
+          <li>
+            <input type="checkbox" id="pr" name="pr" value="pr">
+            <label for="pr">VP of PR</label><br>
+          </li>
+          <li>
+            <input type="checkbox" id="treasurer" name="treasurer" value="treasurer">
+            <label for="treasurer">Treasurer</label>
+          </li>
+          <li>
+            <input type="checkbox" id="saa" name="saa" value="saa">
+            <label for="pr">SAA</label><br>
+          </li>
+          <li>
+            <input type="checkbox" id="secretary" name="secretary" value="secretary">
+            <label for="pr">Secretary</label><br>
+          </li>
+        </ul>  
       </div>
        
       <h3>Next Meeting Details:</h3>
