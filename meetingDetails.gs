@@ -1,40 +1,26 @@
-function replaceWithBold(pattern, newString) {
-  var body = DocumentApp.getActiveDocument().getBody();
-  var found = body.findText(pattern);
-  while (found) {
-    var elem = found.getElement();
-    if (found.isPartial()) {
-      var start = found.getStartOffset();
-      var end = found.getEndOffsetInclusive();
-      elem.setBold(start, end, true);
-    }
-    else {
-      elem.setBold(true);
-    }
-    found = body.findText(pattern, newString);
-  }
-  body.replaceText(pattern, newString);
-}
-
-
-
 function replaceText(){
+  var meeting = {
+    //this is where to pull properties
+    location: '- Online Zoom Meeting',
+    startTime: '5:30 PM'
+  }
   
-  //code for button to replace text based on details
   var doc = DocumentApp.getActiveDocument().getBody();
+  
+  //this will be a loop through the meeting object; replacing text ForegroundColor to black; and properties pulled.
+  
+  
+  
   var found = doc.findText("{Meeting_Location}");
   var elem = found.getElement();
-  found.setForegroundColor("#000000");
-    
+  elem.setForegroundColor("#000000");
+  doc.replaceText('{Meeting_Location}', meeting.location);   
   
-    
-  //var doc = DocumentApp.getActiveDocument().getBody();
-  //var meeting = {
-  //  location: 'Zooooom!'
-  //var found = doc.findText("{meeting_location}");
-  //doc.replaceText('{meeting_location}', meeting.location);  
- 
   
+  var found2 = doc.findText("{Meeting_startTime}");
+  var elem2 = found2.getElement();
+  elem2.setForegroundColor("#000000");
+  doc.replaceText('{Meeting_startTime}', meeting.startTime); 
   
   
 };
