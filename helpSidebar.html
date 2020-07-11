@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+     <style>
+      
+      html {
+        background: #bbdcf0;
+        color: black;
+        line-height: 1.5;
+        font-family: Verdana;
+      }
+      
+      output {  font-size: 200%; 
+                font-family: Helvetica Neue,Helvetica,Arial,sans-serif; }
+      
+      .button {
+        background-color: #2980B9;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+      }
+       
+       
+      .dataInput {
+        background: #f1f2ee;
+        padding: 5px;
+        border-radius: 15px;
+        margin: 5px;
+        border-style: solid;
+        border-width: 2px;
+        border-color: #c3d5d8;
+       }
+       
+    </style>
+  </head>
+  <body>
+    <h3>Help</h3>
+    
+    <p>      
+      <input type="button" value="Details" onclick="google.script.run.showDetails()" />
+      <input type="button" value="Tasks" onclick="google.script.run.showTasks()" />
+      <input type="button" value="Settings" onclick="google.script.run.showSettings()" />
+      <input type="button" value="Close" onclick="google.script.host.close()" />
+    </p>
+
+  </body>
+</html>
+
+

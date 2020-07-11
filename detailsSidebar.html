@@ -1,0 +1,148 @@
+<!--
+
+TODO: Create a separate place to put information to reduce hardcode
+
+-->
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <style>
+      
+      html {
+        background: #bbdcf0;
+        color: black;
+        line-height: 1.5;
+        font-family: Verdana;
+      }
+      
+      output {  font-size: 200%; 
+                font-family: Helvetica Neue,Helvetica,Arial,sans-serif; }
+      
+      .button {
+        background-color: #2980B9;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+      }
+       
+       
+      .dataInput {
+        background: #f1f2ee;
+        padding: 5px;
+        border-radius: 15px;
+        margin: 5px;
+        border-style: solid;
+        border-width: 2px;
+        border-color: #c3d5d8;
+       }
+       
+    </style>
+  </head>
+  <body>
+    
+      <h3>Meeting Details:</h3>
+      <form>
+        <div class="dataInput">
+        <label>Location:</label>
+        <select id="location" name="location">
+          <option value="- Zoom Meeting" selected>Zoom</option>
+          <option value="- BDAR">BDAR</option>
+          <option value="- Coffee shop,_______ ">Coffee shop</option>
+          <option value="- Library">Library</option>
+          <option value="- ______'s Home">Home</option>
+        </select><br>
+        </div>
+        
+        
+        <div class="dataInput">
+          <label>Date:</label>
+          <input type="date" id="meetingDate" name="meetingDate"value=""min="2020-01-01" max="2030-12-31"><br>
+        </div>
+        
+        <div class="dataInput">
+          <label>Start time:</label>
+          <input type="time" id="startTime" name="startTime" min="09:00" max="22:00" required><br>
+          <label>End time:</label>
+          <input type="time" id="endTime" name="endTime" min="09:00" max="22:00" required><br>
+        </div>
+        
+        <div class="dataInput">
+          <label>Chair:</label>
+          <select id="chair" name="chair">
+            <option value="One" selected>One</option>
+            <option value="Two">Two</option>
+            <option value="Three">Three</option>
+            <option value="Four">Four</option>
+            <option value="Five">Five</option>
+            <option value="Six">Six</option>
+            <option value="Seven">Seven</option>
+          </select><br>
+        </div>
+        
+        <label>Recorded by:</label>
+        <select id="recorder" name="recorder">
+          <option value="One" selected>One</option>
+          <option value="Two">Two</option>
+          <option value="Three">Three</option>
+          <option value="Four">Four</option>
+          <option value="Five">Five</option>
+          <option value="Six">Six</option>
+          <option value="Seven">Seven</option>
+        </select><br><br>
+        
+        <label>Present:</label><br>
+        <input type="checkbox" id="president" name="president" value="president">
+        <label for="president">President</label>
+        <input type="checkbox" id="education" name="education" value="education">
+        <label for="education">VP of Education </label><br>
+        <input type="checkbox" id="membership" name="membership" value="membership">
+        <label for="membership">VP of Membership</label>
+        <input type="checkbox" id="pr" name="pr" value="pr">
+        <label for="pr">VP of PR</label><br>
+        <input type="checkbox" id="treasurer" name="treasurer" value="treasurer">
+        <label for="treasurer">Treasurer</label>
+        <input type="checkbox" id="saa" name="saa" value="saa">
+        <label for="pr">SAA</label><br>
+        <input type="checkbox" id="secretary" name="secretary" value="secretary">
+        <label for="pr">Secretary</label><br><br>
+       
+        <h3>Next Meeting Details:</h3>
+        <label>Location:</label>
+        <select id="nextLocation" name="nextLocation">
+          <option value="- Zoom Meeting" selected>Zoom</option>
+          <option value="- BDAR">BDAR</option>
+          <option value="- Coffee shop,_______ ">Coffee shop</option>
+          <option value="- Library">Library</option>
+          <option value="- ______'s Home">Home</option>
+        </select><br>
+        
+        <label>Date:</label>
+        <input type="date" id="nextDate" name="nextDate"value=""min="2020-01-01" max="2030-12-31"><br>
+        
+        <label>Start time:</label>
+        <input type="time" id="nextStart" name="nextStart" min="09:00" max="22:00" required><br>
+      </form>
+    <p><input class="button" onclick="" type="button" value="Replace text" onclick="" /></p> 
+    
+    
+      <p>
+        <input type="button" value="Tasks" onclick="google.script.run.showTasks()" />
+        <input type="button" value="Settings" onclick="google.script.run.showSettings()" />
+        <input type="button" value="Help" onclick="google.script.run.showHelp()" />
+        <input type="button" value="Close" onclick="google.script.host.close()" />
+      </p>
+   
+  </body>
+</html>
+
+
+

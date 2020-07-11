@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+     <style>
+      
+      html {
+        background: #bbdcf0;
+        color: black;
+        line-height: 1.5;
+        font-family: Verdana;
+      }
+      
+      output {  font-size: 200%; 
+                font-family: Helvetica Neue,Helvetica,Arial,sans-serif; }
+      
+      .button {
+        background-color: #2980B9;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+      }
+       
+       
+      .dataInput {
+        background: #f1f2ee;
+        padding: 5px;
+        border-radius: 15px;
+        margin: 5px;
+        border-style: solid;
+        border-width: 2px;
+        border-color: #c3d5d8;
+       }
+       
+    </style>
+  </head>
+  <body>
+    <h3>Tasks</h3>
+    
+      <form oninput="x.value=testDate.value">
+        <label>Completion Date:</label>
+        <input type="date" id="testDate" name="testDate"value=""min="2020-01-01" max="2030-12-31"><br>
+        <input class="button" onclick="" type="button" value="Next Meeting Date" id="x"></input><br>
+        <!-- <output name="x" for="testDate"></output><br> --> 
+      </form>
+      
+      <form oninput="y.value=leadStaff.value">
+        <br>
+        <label>Lead Staff:</label>
+        <select id="leadStaff" name="leadStaff">
+          <option value="">--</option>
+          <option value="One">One</option>
+          <option value="Two">Two</option>
+          <option value="Three">Three</option>
+          <option value="Four">Four</option>
+          <option value="Five">Five</option>
+          <option value="Six">Six</option>
+          <option value="Seven">Seven</option>
+        </select><br>
+        <input class="button" onclick="" type="button" value="Member's Name" id="y"></input><br>
+        <!-- <output name="y" for="leadStaff"></output><br> -->
+      </form>
+      
+    <p>
+      <input type="button" value="Details" onclick="google.script.run.showDetails()" />
+      <input type="button" value="Settings" onclick="google.script.run.showSettings()" />
+      <input type="button" value="Help" onclick="google.script.host.showHelp()" />
+      <input type="button" value="Close" onclick="google.script.host.close()" />
+    </p>
+  </body>
+</html>
+
+
