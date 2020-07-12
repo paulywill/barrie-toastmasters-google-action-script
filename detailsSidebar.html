@@ -158,8 +158,9 @@ TODO: Create a separate place to put information to reduce hardcode
           <input type="time" id="nextStart" name="nextStart" min="09:00" max="22:00" required><br>
         </div>
       </form>
+      <div id="submitButton"></div>
       <p>
-        <input class="button" type="button" value="Save" onclick="google.script.run.formSubmit()" />
+        <input class="button" type="button" value="Save" onclick="formSubmit()" />
         <input class="button" type="button" value="Replace text" onclick="google.script.run.replaceText()" />
       </p> 
       <p>
@@ -175,7 +176,7 @@ TODO: Create a separate place to put information to reduce hardcode
   <script type="text/javascript">  
     function formSubmit() {
       google.script.run.userInput(document.forms[0]);
-      document.getElementById('submitButton').innerHTML = "<div id='dataInput'>Saved</div>";
+      document.getElementById('submitButton').innerHTML = "<div class='dataInput'>Saved</div>";
       google.script.run.withSuccessHandler(hideSaved).waitSeconds();
     }
     
