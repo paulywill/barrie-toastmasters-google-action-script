@@ -17,7 +17,6 @@
 //ref: https://stackoverflow.com/questions/51689943/sp-userproperties-had-been-deprecated
 var sp = PropertiesService.getScriptProperties();
 
-
 function replaceText(){
   var meeting = {
     //this is where to pull properties
@@ -55,6 +54,7 @@ function onOpen(e){
 // ------------------------ Save Sidebar Options ------------------------
 function userInput(form) {
   Logger.log('userinput');
+  Logger.log(form);
   //sp.deleteAllProperties();
   sp.setProperty('meetingLocation', form.meetingLocation);
   sp.setProperty('meetingDate', form.meetingDate);
@@ -62,13 +62,13 @@ function userInput(form) {
   sp.setProperty('endTime', form.endTime);
   sp.setProperty('meetingChair', form.meetingChair);
   sp.setProperty('meetingRecorder', form.meetingRecorder);
-  sp.setProperty('president', form.president);
-  sp.setProperty('education', form.education);
-  sp.setProperty('membership', form.membership);
-  sp.setProperty('pr', form.pr);
-  sp.setProperty('treasurer', form.treasurer);
-  sp.setProperty('saa', form.saa);
-  sp.setProperty('secretary', form.secretary);
+  sp.setProperty('role1', form.role1);
+  sp.setProperty('role2', form.role2);
+  sp.setProperty('role3', form.role3);
+  sp.setProperty('role4', form.role4);
+  sp.setProperty('role5', form.role5);
+  sp.setProperty('role6', form.role6);
+  sp.setProperty('role7', form.role7);
 }
 
 function showDetails() {
