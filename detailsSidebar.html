@@ -62,11 +62,11 @@ TODO: Create a separate place to put information to reduce hardcode
         <div class="dataInput">
           <label>Location:</label>
           <select id="meetingLocation" name="meetingLocation">
-            <option value="- Zoom Meeting" selected>Zoom</option>
-            <option value="- BDAR">BDAR</option>
-            <option value="- Coffee shop,_______ ">Coffee shop</option>
-            <option value="- Library">Library</option>
-            <option value="- ______'s Home">Home</option>
+            <option value="Zoom">Zoom</option>
+            <option value="BDAR">BDAR</option>
+            <option value="CoffeeShop">CoffeeShop</option>
+            <option value="Library">Library</option>
+            <option value="House">House</option>
           </select><br>
         </div>
         
@@ -112,31 +112,31 @@ TODO: Create a separate place to put information to reduce hardcode
           <label>Present:</label><br>  
           <ul class="flex-inner" style="list-style-type:none;">
             <li>
-              <input type="checkbox" id="president" name="president" value="president">
+              <input type="checkbox" id="role1" name="role1" value="president">
               <label for="president">President</label>
             </li>
             <li>
-              <input type="checkbox" id="education" name="education" value="education">
+              <input type="checkbox" id="role2" name="role2" value="education">
               <label for="education">VP of Edu. </label><br>
             </li>
             <li>
-              <input type="checkbox" id="membership" name="membership" value="membership">
+              <input type="checkbox" id="role3" name="role3" value="membership">
               <label for="membership">VP of Mem.</label>
             </li>
             <li>
-              <input type="checkbox" id="pr" name="pr" value="pr">
+              <input type="checkbox" id="role4" name="role4" value="pr">
               <label for="pr">VP of PR</label><br>
             </li>
             <li>
-              <input type="checkbox" id="treasurer" name="treasurer" value="treasurer">
+              <input type="checkbox" id="role5" name="role5" value="treasurer">
               <label for="treasurer">Treasurer</label>
             </li>
             <li>
-              <input type="checkbox" id="saa" name="saa" value="saa">
+              <input type="checkbox" id="role6" name="role6" value="saa">
               <label for="pr">SAA</label><br>
             </li>
             <li>
-              <input type="checkbox" id="secretary" name="secretary" value="secretary">
+              <input type="checkbox" id="role7" name="role7" value="secretary">
               <label for="pr">Secretary</label><br>
             </li>
           </ul>  
@@ -174,6 +174,34 @@ TODO: Create a separate place to put information to reduce hardcode
 
 <!--------------------------------- Code ------------------------------------------->
   <script type="text/javascript">  
+    
+    //runs automatically on load
+    google.script.run.withSuccessHandler(updateFormValues).getAllProperties();
+    
+    
+    
+    // ------------------------------------  Updating Form Values ----------------------------------
+    function updateFormValues(properties) {
+      document.getElementById('meetingLocation').value = properties.meetingLocation || 'Library';
+      //document.getElementById('').value = properties. || '';
+      //document.getElementById('').value = properties. || '';
+      //document.getElementById('').value = properties. || '';
+      //document.getElementById('').value = properties. || '';
+      //document.getElementById('').value = properties. || '';
+      //document.getElementById('').value = properties. || '';
+      //document.getElementById('').value = properties. || '';
+      //TODO: refactor present/regrets to simplier to reduce redundancy
+      // for(i = 0; i < 7; i++){
+      //   properties.'role'+i ? 'ADD TO PRESENT' : 'ADD TO REGRETS
+      // } 
+     }
+     
+    
+     
+    
+    
+    
+      
     function formSubmit() {
       google.script.run.userInput(document.forms[0]);
       document.getElementById('submitButton').innerHTML = "<div class='dataInput'>Saved</div>";
