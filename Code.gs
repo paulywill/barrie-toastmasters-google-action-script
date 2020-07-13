@@ -63,13 +63,16 @@ function userInput(form) {
   sp.setProperty('endTime', form.endTime);
   sp.setProperty('meetingChair', form.meetingChair);
   sp.setProperty('meetingRecorder', form.meetingRecorder);
-  //sp.setProperty('role1', form.role1);
-  //sp.setProperty('role2', form.role2);
-  //sp.setProperty('role3', form.role3);
-  //sp.setProperty('role4', form.role4);
-  //sp.setProperty('role5', form.role5);
-  //sp.setProperty('role6', form.role6);
-  //sp.setProperty('role7', form.role7);
+  sp.setProperty('role1', form.role1);
+  sp.setProperty('role2', form.role2);
+  sp.setProperty('role3', form.role3);
+  sp.setProperty('role4', form.role4);
+  sp.setProperty('role5', form.role5);
+  sp.setProperty('role6', form.role6);
+  sp.setProperty('role7', form.role7);
+  sp.setProperty('nextLocation', form.nextLocation);
+  sp.setProperty('nextDate', form.nextDate);
+  sp.setProperty('nextStart', form.nextStart);
 }
 
 // --------------- Returns Array of All Properties  ---------------------

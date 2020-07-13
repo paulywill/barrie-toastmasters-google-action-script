@@ -186,12 +186,22 @@ TODO: Create a separate place to put information to reduce hardcode
       console.log("properties: " + properties);
       
       document.getElementById('meetingLocation').value = properties.meetingLocation || 'Library';
-      //document.getElementById('').value = properties. || '';
-      //document.getElementById('').value = properties. || '';
-      //document.getElementById('').value = properties. || '';
-      //document.getElementById('').value = properties. || '';
-      //document.getElementById('').value = properties. || '';
-      //document.getElementById('').value = properties. || '';
+      document.getElementById('meetingDate').value = properties.meetingDate;
+      document.getElementById('startTime').value = properties.startTime;
+      document.getElementById('endTime').value = properties.endTime;
+      document.getElementById('meetingChair').value = properties.meetingChair || 'One';
+      document.getElementById('meetingRecorder').value = properties.meetingRecorder || 'Seven';
+      document.getElementById('role1').value = properties.role1;
+      document.getElementById('role2').value = properties.role2;
+      document.getElementById('role3').value = properties.role3;
+      document.getElementById('role4').value = properties.role4;
+      document.getElementById('role5').value = properties.role5;
+      document.getElementById('role6').value = properties.role6;
+      document.getElementById('role7').value = properties.role7;
+      document.getElementById('nextLocation').value = properties.nextLocation || 'Library' ;
+      document.getElementById('nextDate').value = properties.nextDate || 'Library' ;
+      document.getElementById('nextStart').value = properties.nextStart || 'Library' ;
+      
       //document.getElementById('').value = properties. || '';
       //TODO: refactor present/regrets to simplier to reduce redundancy
       // for(i = 0; i < 7; i++){
