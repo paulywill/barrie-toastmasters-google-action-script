@@ -31,7 +31,7 @@ function replaceText(){
   var found = doc.findText("{Meeting_Location}");
   var elem = found.getElement();
   elem.setForegroundColor("#000000");
-  doc.replaceText('{Meeting_Location}', meeting.location);   
+  doc.replaceText('{Meeting_Location}', meeting.meetingLocation);   
   
   var found2 = doc.findText("{Meeting_startTime}");
   var elem2 = found2.getElement();
@@ -55,21 +55,35 @@ function onOpen(e){
 function userInput(form) {
   Logger.log('userinput');
   Logger.log(form);
-  //sp.deleteAllProperties();
+  sp.deleteAllProperties();
+  Logger.log(form);
   sp.setProperty('meetingLocation', form.meetingLocation);
   sp.setProperty('meetingDate', form.meetingDate);
   sp.setProperty('startTime', form.startTime);
   sp.setProperty('endTime', form.endTime);
   sp.setProperty('meetingChair', form.meetingChair);
   sp.setProperty('meetingRecorder', form.meetingRecorder);
-  sp.setProperty('role1', form.role1);
-  sp.setProperty('role2', form.role2);
-  sp.setProperty('role3', form.role3);
-  sp.setProperty('role4', form.role4);
-  sp.setProperty('role5', form.role5);
-  sp.setProperty('role6', form.role6);
-  sp.setProperty('role7', form.role7);
+  //sp.setProperty('role1', form.role1);
+  //sp.setProperty('role2', form.role2);
+  //sp.setProperty('role3', form.role3);
+  //sp.setProperty('role4', form.role4);
+  //sp.setProperty('role5', form.role5);
+  //sp.setProperty('role6', form.role6);
+  //sp.setProperty('role7', form.role7);
 }
+
+// --------------- Returns Array of All Properties  ---------------------
+function getAllProperties() {
+  var propertiesAndKeys = {}
+  var data = sp.getProperties();
+  for (var key in data) {
+    propertiesAndKeys[key] = sp.getProperty(key);
+    // Logger.log('Key: %s - %s', key, data[key]);
+  }
+  return propertiesAndKeys;
+}
+
+
 
 function showDetails() {
   var html = HtmlService.createHtmlOutputFromFile('detailsSidebar')

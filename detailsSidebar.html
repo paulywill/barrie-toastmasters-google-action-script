@@ -182,6 +182,9 @@ TODO: Create a separate place to put information to reduce hardcode
     
     // ------------------------------------  Updating Form Values ----------------------------------
     function updateFormValues(properties) {
+      
+      console.log("properties: " + properties);
+      
       document.getElementById('meetingLocation').value = properties.meetingLocation || 'Library';
       //document.getElementById('').value = properties. || '';
       //document.getElementById('').value = properties. || '';
