@@ -189,8 +189,6 @@ TODO: Create a separate place to put information to reduce hardcode
       document.getElementById('meetingDate').value = properties.meetingDate;
       document.getElementById('startTime').value = properties.startTime;
       document.getElementById('endTime').value = properties.endTime;
-      document.getElementById('meetingChair').value = properties.meetingChair || 'One';
-      document.getElementById('meetingRecorder').value = properties.meetingRecorder || 'Seven';
       document.getElementById('nextLocation').value = properties.nextLocation || 'Zoom' ;
       document.getElementById('nextDate').value = properties.nextDate;
       document.getElementById('nextStart').value = properties.nextStart || '17:45' ;
@@ -213,6 +211,8 @@ TODO: Create a separate place to put information to reduce hardcode
         selectRecorder.appendChild(el);
         selectChair.appendChild(el2);
       }
+      document.getElementById('meetingChair').value = properties.meetingChair;
+      document.getElementById('meetingRecorder').value = properties.meetingRecorder; 
     }
       
     // ------------------------------------  Submitting Form  --------------------------------------    
