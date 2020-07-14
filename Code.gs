@@ -64,15 +64,10 @@ function userInput(form) {
   sp.setProperty('nextLocation', form.nextLocation);
   sp.setProperty('nextDate', form.nextDate);
   sp.setProperty('nextStart', form.nextStart);
+  for (i = 1; i <8; i++){
+    sp.setProperty('role'+i+'Hidden', form['role'+i+'Hidden']);    
+  }  
   
-  sp.setProperty('role1Hidden', form.role1Hidden);  
-  sp.setProperty('role2Hidden', form.role2Hidden);  
-  sp.setProperty('role3Hidden', form.role3Hidden);  
-  sp.setProperty('role4Hidden', form.role4Hidden);  
-  sp.setProperty('role5Hidden', form.role5Hidden);  
-  sp.setProperty('role6Hidden', form.role6Hidden);  
-  sp.setProperty('role7Hidden', form.role7Hidden);    
- 
 
 }
 

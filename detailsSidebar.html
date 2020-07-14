@@ -197,20 +197,19 @@ TODO: Create a separate place to put information to reduce hardcode
     
     
     
-    // ------------------------------------  Updating Form Values ----------------------------------
+    // ------------------------- Updating Form Values -----------------------------------------------sp.setProperty('role1Hidden', form.role1Hidden);  
     function updateFormValues(properties) {
-      document.getElementById('meetingLocation').value = properties.meetingLocation || 'Library';
+      document.getElementById('meetingLocation').value = properties.meetingLocation || 'Zoom';
       document.getElementById('meetingDate').value = properties.meetingDate;
       document.getElementById('startTime').value = properties.startTime;
       document.getElementById('endTime').value = properties.endTime;
       document.getElementById('meetingChair').value = properties.meetingChair || 'One';
       document.getElementById('meetingRecorder').value = properties.meetingRecorder || 'Seven';
-      document.getElementById('nextLocation').value = properties.nextLocation || 'Library' ;
+      document.getElementById('nextLocation').value = properties.nextLocation || 'Zoom' ;
       document.getElementById('nextDate').value = properties.nextDate;
       document.getElementById('nextStart').value = properties.nextStart || '17:45' ;
       //checkboxes logic; typeof the checkboxes passed by the form is string
       for (i=1;i <8; i++){
-        console.log('role'+i+': '+ properties['role'+i+'Hidden'])
         if (properties['role'+i+'Hidden'] == 'true'){
           document.getElementById('role'+i).checked = true
         }
