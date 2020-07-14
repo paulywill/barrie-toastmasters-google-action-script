@@ -47,7 +47,7 @@ TODO: Create a separate place to put information to reduce hardcode
         border-color: #c3d5d8;
        }
        
-       .messageOutput {
+      .messageOutput {
         background: #00FA9A;
         padding: 5px;
         border-radius: 15px;
@@ -214,9 +214,12 @@ TODO: Create a separate place to put information to reduce hardcode
           document.getElementById('role'+i).checked = true
         }
       }
-      
-      
     }
+      
+      
+      
+      
+      
       
     // ------------------------------------  Submitting Form  --------------------------------------    
     function formSubmit() {
@@ -228,7 +231,7 @@ TODO: Create a separate place to put information to reduce hardcode
           document.getElementById("role"+i+"Hidden").value = false;
         }
       }
-      google.script.run.userInput(document.forms[0]);
+      google.script.run.meetingInput(document.forms[0]);
       document.getElementById('submitButton').innerHTML = "<div class='messageOutput'>Saved</div>";
       google.script.run.withSuccessHandler(hideSaved).waitSeconds();
     }

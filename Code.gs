@@ -51,9 +51,9 @@ function onOpen(e){
       .addToUi();
 }
 
-// ------------------------ Save Sidebar Options ------------------------
-function userInput(form) {
-  Logger.log('userinput');
+// ------------------------ Save Meeting Details  ------------------------
+function meetingInput(form) {
+  Logger.log('meetingInput');
   Logger.log(form);
   sp.setProperty('meetingLocation', form.meetingLocation);
   sp.setProperty('meetingDate', form.meetingDate);
@@ -67,8 +67,19 @@ function userInput(form) {
   for (i = 1; i <8; i++){
     sp.setProperty('role'+i+'Hidden', form['role'+i+'Hidden']);    
   }  
-  
+}
 
+function settingsInput(form) {
+  Logger.log('settingsInput');
+  Logger.log(form);
+  //sp.setProperty('meetingLocation', form.meetingLocation);
+  sp.setProperty('prez', form.prez);
+  sp.setProperty('vpedu', form.vpedu);
+  sp.setProperty('vpmem', form.vpmem);
+  sp.setProperty('vppr', form.vppr);
+  sp.setProperty('tres', form.tres);
+  sp.setProperty('saa', form.saa);
+  sp.setProperty('sec', form.sec);
 }
 
 // --------------- Returns Array of All Properties  ---------------------

@@ -26,8 +26,7 @@
         margin: 4px 2px;
         cursor: pointer;
       }
-       
-       
+           
       .dataInput {
         background: #f1f2ee;
         padding: 5px;
@@ -36,38 +35,69 @@
         border-style: solid;
         border-width: 2px;
         border-color: #c3d5d8;
-       }
+      }
+       
+      .messageOutput {
+        background: #00FA9A;
+        padding: 5px;
+        border-radius: 15px;
+        margin: 5px;
+        border-style: solid;
+        border-width: 2px;
+        border-color: #c3d5d8;
+      }
        
     </style>
   </head>
   <body>
-    <h3>Settings</h3>
-    
-    <form>
-      <label for="prez">President: </label>
-      <input type="text" id="prez" name="prez"><br>
-      <label for="vpedu">VP of Edu: </label>
-      <input type="text" id="vpedu" name="vpedu"><br>
-      <label for="vpmem">VP of Mem: </label>
-      <input type="text" id="vpmem" name="vpmem"><br>
-      <label for="vppr">VP of PR: </label>
-      <input type="text" id="vppr" name="vppr"><br>
-      <label for="tres">Treasurer: </label>
-      <input type="text" id="tres" name="tres"><br>
-      <label for="saa">SAA: </label>
-      <input type="text" id="saa" name="saa"><br>
-      <label for="sec">Secretary: </label>
-      <input type="text" id="sec" name="sec"><br><br>
-    </form>
-    
-      
-    <p>
-      <input type="button" value="Details" onclick="google.script.run.showDetails()" />
-      <input type="button" value="Tasks" onclick="google.script.run.showTasks()" />
-      <input type="button" value="Help" onclick="google.script.run.showHelp()" />
-      <input type="button" value="Close" onclick="google.script.host.close()" />
-    </p>
+    <center>
+      <h3>Settings</h3>
+      <div class="dataInput">
+        <form>
+          <label for="prez">President: </label>
+          <input type="text" id="prez" name="prez"><br>
+          <label for="vpedu">VP of Edu: </label>
+          <input type="text" id="vpedu" name="vpedu"><br>
+          <label for="vpmem">VP of Mem: </label>
+          <input type="text" id="vpmem" name="vpmem"><br>
+          <label for="vppr">VP of PR: </label>
+          <input type="text" id="vppr" name="vppr"><br>
+          <label for="tres">Treasurer: </label>
+          <input type="text" id="tres" name="tres"><br>
+          <label for="saa">SAA: </label>
+          <input type="text" id="saa" name="saa"><br>
+          <label for="sec">Secretary: </label>
+          <input type="text" id="sec" name="sec"><br><br>
+        </form>
+      </div>
+      <div id="submitButton"></div>
+      <p>
+        <input class="button" type="button" value="Save" onclick="formSubmit()" />
+      </p>     
+      <p>
+        <input type="button" value="Details" onclick="google.script.run.showDetails()" />
+        <input type="button" value="Tasks" onclick="google.script.run.showTasks()" />
+        <input type="button" value="Help" onclick="google.script.run.showHelp()" />
+        <input type="button" value="Close" onclick="google.script.host.close()" />
+      </p>
+    </center>
   </body>
+  
+  <!--------------------------------- Code ------------------------------------------->
+  <script type="text/javascript">  
+    
+    function formSubmit() {
+      google.script.run.settingsInput(document.forms[0]);
+      document.getElementById('submitButton').innerHTML = "<div class='messageOutput'>Saved</div>";
+      google.script.run.withSuccessHandler(hideSaved).waitSeconds();  
+    }
+    
+    function hideSaved() {
+      document.getElementById('submitButton').innerHTML = "";
+    }
+       
+  </script>    
+  
 </html>
 
 
