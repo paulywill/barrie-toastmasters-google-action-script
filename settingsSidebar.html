@@ -55,19 +55,20 @@
       <div class="dataInput">
         <form>
           <label for="prez">President: </label>
-          <input type="text" id="prez" name="prez"><br>
+          <input type="text" id="setting1" name="setting1"><br>
           <label for="vpedu">VP of Edu: </label>
-          <input type="text" id="vpedu" name="vpedu"><br>
+          <input type="text" id="setting2" name="setting2"><br>
           <label for="vpmem">VP of Mem: </label>
-          <input type="text" id="vpmem" name="vpmem"><br>
+          <input type="text" id="setting3" name="setting3"><br>
           <label for="vppr">VP of PR: </label>
-          <input type="text" id="vppr" name="vppr"><br>
+          <input type="text" id="setting4" name="setting4"><br>
           <label for="tres">Treasurer: </label>
-          <input type="text" id="tres" name="tres"><br>
+          <input type="text" id="setting5" name="setting5"><br>
           <label for="saa">SAA: </label>
-          <input type="text" id="saa" name="saa"><br>
+          <input type="text" id="setting6" name="setting6"><br>
           <label for="sec">Secretary: </label>
-          <input type="text" id="sec" name="sec"><br><br>
+          <input type="text" id="setting7" name="setting7"><br>
+          <br>
         </form>
       </div>
       <div id="submitButton"></div>
@@ -85,6 +86,16 @@
   
   <!--------------------------------- Code ------------------------------------------->
   <script type="text/javascript">  
+    
+    //runs automatically on load
+    google.script.run.withSuccessHandler(updateFormValues).getAllProperties();
+    
+    // ------------------------- Updating Form Values ---------------------------------
+    function updateFormValues(properties) {
+      for(i = 1; i < 8; i++){
+        document.getElementById('setting'+i).value = properties['setting'+i];  
+      } 
+    }
     
     function formSubmit() {
       google.script.run.settingsInput(document.forms[0]);

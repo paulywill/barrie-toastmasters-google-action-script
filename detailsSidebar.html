@@ -95,26 +95,12 @@ TODO: Create a separate place to put information to reduce hardcode
         <div class="dataInput">
           <label>Chair:</label>
           <select id="meetingChair" name="meetingChair">
-            <option value="One" selected>One</option>
-            <option value="Two">Two</option>
-            <option value="Three">Three</option>
-            <option value="Four">Four</option>
-            <option value="Five">Five</option>
-            <option value="Six">Six</option>
-            <option value="Seven">Seven</option>
           </select><br>
         </div>
         
         <div class="dataInput">
           <label>Recorded by:</label>
           <select id="meetingRecorder" name="meetingRecorder">
-            <option value="One" selected>One</option>
-            <option value="Two">Two</option>
-            <option value="Three">Three</option>
-            <option value="Four">Four</option>
-            <option value="Five">Five</option>
-            <option value="Six">Six</option>
-            <option value="Seven">Seven</option>
           </select><br>
         </div>
         
@@ -197,7 +183,7 @@ TODO: Create a separate place to put information to reduce hardcode
     
     
     
-    // ------------------------- Updating Form Values -----------------------------------------------sp.setProperty('role1Hidden', form.role1Hidden);  
+    // ------------------------- Updating Form Values -----------------------------------------------
     function updateFormValues(properties) {
       document.getElementById('meetingLocation').value = properties.meetingLocation || 'Zoom';
       document.getElementById('meetingDate').value = properties.meetingDate;
@@ -209,17 +195,25 @@ TODO: Create a separate place to put information to reduce hardcode
       document.getElementById('nextDate').value = properties.nextDate;
       document.getElementById('nextStart').value = properties.nextStart || '17:45' ;
       //checkboxes logic; typeof the checkboxes passed by the form is string
-      for (i=1;i <8; i++){
+      var selectChair = document.getElementById("meetingChair");
+      var selectRecorder = document.getElementById("meetingRecorder");
+      for (i=1;i < 8; i++){
         if (properties['role'+i+'Hidden'] == 'true'){
           document.getElementById('role'+i).checked = true
         }
+        
+        //populate dropdown boxes
+        var opt = properties['setting'+i];
+        var el = document.createElement("option");
+        var el2 = document.createElement("option");
+        el.textContent = opt;
+        el.value = opt;
+        el2.textContent = opt;
+        el2.value = opt;
+        selectRecorder.appendChild(el);
+        selectChair.appendChild(el2);
       }
     }
-      
-      
-      
-      
-      
       
     // ------------------------------------  Submitting Form  --------------------------------------    
     function formSubmit() {

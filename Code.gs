@@ -67,19 +67,17 @@ function meetingInput(form) {
   for (i = 1; i <8; i++){
     sp.setProperty('role'+i+'Hidden', form['role'+i+'Hidden']);    
   }  
+  
+  
 }
 
 function settingsInput(form) {
   Logger.log('settingsInput');
   Logger.log(form);
   //sp.setProperty('meetingLocation', form.meetingLocation);
-  sp.setProperty('prez', form.prez);
-  sp.setProperty('vpedu', form.vpedu);
-  sp.setProperty('vpmem', form.vpmem);
-  sp.setProperty('vppr', form.vppr);
-  sp.setProperty('tres', form.tres);
-  sp.setProperty('saa', form.saa);
-  sp.setProperty('sec', form.sec);
+  for (i = 1; i <8; i++){
+    sp.setProperty('setting'+i, form['setting'+i]);    
+  }  
 }
 
 // --------------- Returns Array of All Properties  ---------------------
