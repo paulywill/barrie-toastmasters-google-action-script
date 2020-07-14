@@ -55,24 +55,25 @@ function onOpen(e){
 function userInput(form) {
   Logger.log('userinput');
   Logger.log(form);
-  sp.deleteAllProperties();
-  Logger.log(form);
   sp.setProperty('meetingLocation', form.meetingLocation);
   sp.setProperty('meetingDate', form.meetingDate);
   sp.setProperty('startTime', form.startTime);
   sp.setProperty('endTime', form.endTime);
   sp.setProperty('meetingChair', form.meetingChair);
   sp.setProperty('meetingRecorder', form.meetingRecorder);
-  sp.setProperty('role1', form.role1);
-  sp.setProperty('role2', form.role2);
-  sp.setProperty('role3', form.role3);
-  sp.setProperty('role4', form.role4);
-  sp.setProperty('role5', form.role5);
-  sp.setProperty('role6', form.role6);
-  sp.setProperty('role7', form.role7);
   sp.setProperty('nextLocation', form.nextLocation);
   sp.setProperty('nextDate', form.nextDate);
   sp.setProperty('nextStart', form.nextStart);
+  
+  sp.setProperty('role1Hidden', form.role1Hidden);  
+  sp.setProperty('role2Hidden', form.role2Hidden);  
+  sp.setProperty('role3Hidden', form.role3Hidden);  
+  sp.setProperty('role4Hidden', form.role4Hidden);  
+  sp.setProperty('role5Hidden', form.role5Hidden);  
+  sp.setProperty('role6Hidden', form.role6Hidden);  
+  sp.setProperty('role7Hidden', form.role7Hidden);    
+ 
+
 }
 
 // --------------- Returns Array of All Properties  ---------------------

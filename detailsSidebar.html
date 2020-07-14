@@ -47,6 +47,16 @@ TODO: Create a separate place to put information to reduce hardcode
         border-color: #c3d5d8;
        }
        
+       .messageOutput {
+        background: #00FA9A;
+        padding: 5px;
+        border-radius: 15px;
+        margin: 5px;
+        border-style: solid;
+        border-width: 2px;
+        border-color: #c3d5d8;
+       }
+       
       .flex-inner {
         display: flex;
         flex-wrap: wrap;
@@ -110,33 +120,40 @@ TODO: Create a separate place to put information to reduce hardcode
         
         <div class="dataInput">
           <label>Present:</label><br>  
-          <ul class="flex-inner" style="list-style-type:none;">
+          <ul id="attend" class="flex-inner" style="list-style-type:none;">
             <li>
-              <input type="checkbox" id="role1" name="role1" value="president">
+              <input type="checkbox" id="role1" name="role1" >
+              <input type="hidden" id="role1Hidden" name="role1Hidden" value="" >
               <label for="president">President</label>
             </li>
             <li>
-              <input type="checkbox" id="role2" name="role2" value="education">
+              <input type="checkbox" id="role2" name="role2" >
+              <input type="hidden" id="role2Hidden" name="role2Hidden" value="" >
               <label for="education">VP of Edu. </label><br>
             </li>
             <li>
-              <input type="checkbox" id="role3" name="role3" value="membership">
+              <input type="checkbox" id="role3" name="role3" >
+              <input type="hidden" id="role3Hidden" name="role3Hidden" value="" >
               <label for="membership">VP of Mem.</label>
             </li>
             <li>
-              <input type="checkbox" id="role4" name="role4" value="pr">
+              <input type="checkbox" id="role4" name="role4" >
+              <input type="hidden" id="role4Hidden" name="role4Hidden" value=""  >
               <label for="pr">VP of PR</label><br>
             </li>
             <li>
-              <input type="checkbox" id="role5" name="role5" value="treasurer">
+              <input type="checkbox" id="role5" name="role5" >
+              <input type="hidden" id="role5Hidden" name="role5Hidden" value="" >
               <label for="treasurer">Treasurer</label>
             </li>
             <li>
-              <input type="checkbox" id="role6" name="role6" value="saa">
+              <input type="checkbox" id="role6" name="role6" >
+              <input type="hidden" id="role6Hidden" name="role6Hidden" value="" >
               <label for="pr">SAA</label><br>
             </li>
             <li>
-              <input type="checkbox" id="role7" name="role7" value="secretary">
+              <input type="checkbox" id="role7" name="role7" >
+              <input type="hidden" id="role7Hidden" name="role7Hidden" value="" >
               <label for="pr">Secretary</label><br>
             </li>
           </ul>  
@@ -182,42 +199,38 @@ TODO: Create a separate place to put information to reduce hardcode
     
     // ------------------------------------  Updating Form Values ----------------------------------
     function updateFormValues(properties) {
-      
-      console.log("properties: " + properties);
-      
       document.getElementById('meetingLocation').value = properties.meetingLocation || 'Library';
       document.getElementById('meetingDate').value = properties.meetingDate;
       document.getElementById('startTime').value = properties.startTime;
       document.getElementById('endTime').value = properties.endTime;
       document.getElementById('meetingChair').value = properties.meetingChair || 'One';
       document.getElementById('meetingRecorder').value = properties.meetingRecorder || 'Seven';
-      document.getElementById('role1').value = properties.role1;
-      document.getElementById('role2').value = properties.role2;
-      document.getElementById('role3').value = properties.role3;
-      document.getElementById('role4').value = properties.role4;
-      document.getElementById('role5').value = properties.role5;
-      document.getElementById('role6').value = properties.role6;
-      document.getElementById('role7').value = properties.role7;
       document.getElementById('nextLocation').value = properties.nextLocation || 'Library' ;
-      document.getElementById('nextDate').value = properties.nextDate || 'Library' ;
-      document.getElementById('nextStart').value = properties.nextStart || 'Library' ;
+      document.getElementById('nextDate').value = properties.nextDate;
+      document.getElementById('nextStart').value = properties.nextStart || '17:45' ;
+      //checkboxes logic; typeof the checkboxes passed by the form is string
+      for (i=1;i <8; i++){
+        console.log('role'+i+': '+ properties['role'+i+'Hidden'])
+        if (properties['role'+i+'Hidden'] == 'true'){
+          document.getElementById('role'+i).checked = true
+        }
+      }
       
-      //document.getElementById('').value = properties. || '';
-      //TODO: refactor present/regrets to simplier to reduce redundancy
-      // for(i = 0; i < 7; i++){
-      //   properties.'role'+i ? 'ADD TO PRESENT' : 'ADD TO REGRETS
-      // } 
-     }
-     
-    
-     
-    
-    
-    
       
+    }
+      
+    // ------------------------------------  Submitting Form  --------------------------------------    
     function formSubmit() {
+      //before passing form determine which checkboxes are on
+      for(i = 1; i < 8; i++){
+        if(document.getElementById("role"+i).checked) {
+          document.getElementById("role"+i+"Hidden").value = true;
+        }else{
+          document.getElementById("role"+i+"Hidden").value = false;
+        }
+      }
       google.script.run.userInput(document.forms[0]);
-      document.getElementById('submitButton').innerHTML = "<div class='dataInput'>Saved</div>";
+      document.getElementById('submitButton').innerHTML = "<div class='messageOutput'>Saved</div>";
       google.script.run.withSuccessHandler(hideSaved).waitSeconds();
     }
     
