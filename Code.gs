@@ -1,31 +1,19 @@
 // Barrie Toastmasters ~ Executive Meeting Minutes Helper
-// sloppyright Paul Gamble, 2020
+// sloppyright Paul Will Gamble, 2020
+// paulywill.com | https://github.com/paulywill/barrie-toastmasters-google-action-script
 // ----------------------------------------------------------------------------------------
-// Model ref:https://kurtkaiser.us/how-to-code-a-html-user-interface-in-google-apps-script/
+// Modeled in part after this fantastic tutorial by Kurt Kaiser
+//   ref:https://kurtkaiser.us/how-to-code-a-html-user-interface-in-google-apps-script/
 //   UI Sheets Email Notifications
 //   Kurt Kaiser
 //   kurtkaiser.us
 //   All Rights Reserved, 2019
 // ----------------------------------------------------------------------------------------
 
-// Declare global variables
-//var ss = SpreadsheetApp.getActiveSpreadsheet();
-//var sheet = ss.getActiveSheet();
-//var lastRow = sheet.getLastRow();
-//var lastColumn = sheet.getLastColumn();
-
-//ref: https://stackoverflow.com/questions/51689943/sp-userproperties-had-been-deprecated
 var sp = PropertiesService.getScriptProperties();
 
-
-
-
-
-
-function replaceText(){
-  
-  /* 
-  
+function replaceText(){  
+/* 
    PLACEHOLDERS           PROPERTIES AND TEST DATA  
    ============           ========================
    {Names_Present},
@@ -48,10 +36,9 @@ function replaceText(){
     
    {Next_Date}            nextDate=2020-09-01 
    {Next_Location}        nextLocation=Zoom 
-   {Next_Time}            nextStart=17:45 
+   {Next_Time}            nextStart=17:45   
 
-  
-  */
+*/
   
   Logger.log('replaceText');
   let doc = DocumentApp.getActiveDocument().getBody();
@@ -69,7 +56,6 @@ function replaceText(){
     Next_Location: "nextLocation",
     Next_Time: "nextStart"   
   } 
-  
   
   //logic for 'present' and 'regrets' 
   for (i = 1; i < 8; i++){  
@@ -91,8 +77,7 @@ function replaceText(){
   var elemRegrets = foundRegrets.getElement();
   elemRegrets.setForegroundColor("#000000");
   doc.replaceText('{Names_Regrets}', regrets); 
-  
-  
+   
   //logic for replace placeholders with properties
   for (const [key, value] of Object.entries(meeting)) {
     //Logger.log(`${key}: ${value}`); 
@@ -108,50 +93,10 @@ function replaceText(){
     if(key.includes('Time')){
       Logger.log('time: ' + properties[value]);
       doc.replaceText(`{${key}}`, formatTime(properties[value]));          
-    }
-    
-    doc.replaceText(`{${key}}`, properties[value]); 
-   
+    }  
+    doc.replaceText(`{${key}}`, properties[value]);   
   }
-  
-  
-  /*
- var meetingPlaceholders = {
-   
-   
-   
-   
-  
-   
- }
-   */  
-  
-  
-/*              //  TESTING
-                //--------------
-                var meeting = {
-                  //this is where to pull properties
-                  location: '- Online Zoom Meeting',
-                  startTime: '5:30 PM'
-                }
-                
-                var doc = DocumentApp.getActiveDocument().getBody();
-                
-                //this will be a loop through the meeting object; replacing text ForegroundColor to black; and properties pulled.
-                var found = doc.findText("{Meeting_Location}");
-                var elem = found.getElement();
-                elem.setForegroundColor("#000000");
-                doc.replaceText('{Meeting_Location}', meeting.meetingLocation);  
-                
-                
-                var found2 = doc.findText("{Meeting_startTime}");
-                var elem2 = found2.getElement();
-                elem2.setForegroundColor("#000000");
-                doc.replaceText('{Meeting_startTime}', meeting.startTime); 
-  */
-  
-  
-  
+    
 };
 
 function onOpen(e){ 
@@ -188,15 +133,14 @@ function meetingInput(form) {
 function settingsInput(form) {
   Logger.log('settingsInput');
   Logger.log(form);
-  //sp.setProperty('meetingLocation', form.meetingLocation);
+  //loop through and save all names for roles
   for (i = 1; i < 8; i++){
     sp.setProperty('settingRole'+i, form['settingRole'+i]);     
   }
-
+  //loop through and save all the names of locations
   for (i = 1; i < 6; i++){
      sp.setProperty('settingLocation'+i, form['settingLocation'+i]);    
   }  
-  
 }
 
 // --------------- Returns Array of All Properties  ---------------------
@@ -251,7 +195,6 @@ function waitSeconds() {
 function deleteData() {
   sp.deleteAllProperties();
 }
-
 
 //format date for readability; ref ~ https://stackoverflow.com/a/31732581
 function formatDate(ISOdate) {
