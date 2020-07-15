@@ -71,18 +71,33 @@ function replaceText(){
   //logic for 'present' and 'regrets' 
   for (i = 1; i < 8; i++){  
     if(properties['role'+i+'Hidden'] == 'true'){
-      present.push(properties['settingRole'+i]);  
-    } else{
-      regrets.push(properties['settingRole'+i]);  
+      present.push(' ' + properties['settingRole'+i]);  
+    } else {
+      regrets.push(' ' + properties['settingRole'+i]);  
     }  
   }
+  
+  //replace {Names_Present} placeholder with array
+  var foundPresent = doc.findText('{Names_Present}');
+  var elemPresent = foundPresent.getElement();
+  elemPresent.setForegroundColor("#000000");
+  doc.replaceText('{Names_Present}', present); 
+  
+  //replace '{Names_Regrets}' placeholder with array
+  var foundRegrets = doc.findText('{Names_Regrets}');
+  var elemRegrets = foundRegrets.getElement();
+  elemRegrets.setForegroundColor("#000000");
+  doc.replaceText('{Names_Regrets}', regrets); 
   
   
   //logic for replace placeholders with properties
   for (const [key, value] of Object.entries(meeting)) {
     //Logger.log(`${key}: ${value}`); 
     var found = doc.findText(`{${key}}`);
-    Logger.log(found);
+    var elem = found.getElement();
+    elem.setForegroundColor("#000000");
+    doc.replaceText(`{${key}}`, properties[value]); 
+   
   }
   
   
@@ -112,7 +127,9 @@ function replaceText(){
                 var found = doc.findText("{Meeting_Location}");
                 var elem = found.getElement();
                 elem.setForegroundColor("#000000");
-                doc.replaceText('{Meeting_Location}', meeting.meetingLocation);     
+                doc.replaceText('{Meeting_Location}', meeting.meetingLocation);  
+                
+                
                 var found2 = doc.findText("{Meeting_startTime}");
                 var elem2 = found2.getElement();
                 elem2.setForegroundColor("#000000");
