@@ -19,6 +19,9 @@ var sp = PropertiesService.getScriptProperties();
 
 
 
+
+
+
 function replaceText(){
   
   /* 
@@ -93,9 +96,20 @@ function replaceText(){
   //logic for replace placeholders with properties
   for (const [key, value] of Object.entries(meeting)) {
     //Logger.log(`${key}: ${value}`); 
+    
     var found = doc.findText(`{${key}}`);
     var elem = found.getElement();
     elem.setForegroundColor("#000000");
+    //format date
+    if(key == 'Meeting_Date'){
+      Logger.log('date: ' + properties[value]);
+      doc.replaceText(`{${key}}`, formatDate(properties[value]));          
+    }
+    if(key.includes('Time')){
+      Logger.log('time: ' + properties[value]);
+      doc.replaceText(`{${key}}`, formatTime(properties[value]));          
+    }
+    
     doc.replaceText(`{${key}}`, properties[value]); 
    
   }
@@ -238,3 +252,19 @@ function deleteData() {
   sp.deleteAllProperties();
 }
 
+
+//format date for readability; ref ~ https://stackoverflow.com/a/31732581
+function formatDate(ISOdate) {
+  var date = new Date(ISOdate.replace(/-/g, '\/'));
+  return date.toDateString();  
+}
+
+//format time for readability; ref ~ https://stackoverflow.com/a/13898483
+function formatTime(militaryTime) {
+  var timeString = militaryTime;
+  var H = +timeString.substr(0, 2);
+  var h = (H % 12) || 12;
+  var ampm = H < 12 ? "AM" : "PM";
+  timeString = h + timeString.substr(2, 3) + ' '+ ampm;
+  return timeString;
+}
