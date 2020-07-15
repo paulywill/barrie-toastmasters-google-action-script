@@ -20,25 +20,85 @@ var sp = PropertiesService.getScriptProperties();
 
 
 function replaceText(){
-  var meeting = {
-    //this is where to pull properties
-    location: '- Online Zoom Meeting',
-    startTime: '5:30 PM'
+  Logger.log('replaceText');
+  var properties =  getAllProperties();
+  Logger.log('properties.meetingDate: '+ properties.meetingDate);
+  var present = [];
+  var regrets = [];
+  for (i = 1; i < 8; i++){
+    
+    if(properties['role'+i+'Hidden'] == 'true'){
+      present.push(properties['settingRole'+i]);  
+    } else{
+      regrets.push(properties['settingRole'+i]);  
+    }  
   }
+  Logger.log('present: ' + present );
+  Logger.log('regrets: ' + regrets );
+  /* 
   
-  var doc = DocumentApp.getActiveDocument().getBody();
+  {  
+     role1Hidden=true,  settingRole1=Fleurette Knaggs, 
+     role2Hidden=false, settingRole2=Dan Bell, 
+     role3Hidden=true,  settingRole3=Jennifer Keresztesi, 
+     role4Hidden=false, settingRole4=Shelly Grant, 
+     role5Hidden=true,  settingRole5=Brian MacGregor, 
+     role6Hidden=false, settingRole6=Rufus Willett, 
+     role7Hidden=true,  settingRole7=Paul Gamble, 
+            
+     startTime=17:45, 
+     endTime=18:46, 
+     meetingLocation=Zoom, 
+     meetingDate=2020-08-04, 
+     
+     nextDate=2020-09-01, 
+     nextLocation=Zoom, 
+     nextStart=17:45, 
+     
+     meetingRecorder=Paul Gamble, 
+     meetingChair=Fleurette Knaggs}
   
-  //this will be a loop through the meeting object; replacing text ForegroundColor to black; and properties pulled.
- 
-  var found = doc.findText("{Meeting_Location}");
-  var elem = found.getElement();
-  elem.setForegroundColor("#000000");
-  doc.replaceText('{Meeting_Location}', meeting.meetingLocation);   
+  */
   
-  var found2 = doc.findText("{Meeting_startTime}");
-  var elem2 = found2.getElement();
-  elem2.setForegroundColor("#000000");
-  doc.replaceText('{Meeting_startTime}', meeting.startTime); 
+  /*
+ var meetingPlaceholders = {
+   {Meeting_Date}
+   {Meeting_Location}
+   {Meeting_startTime} 
+   {Meeting_endTime}
+   {Name_Chair}
+   {Name_Secretary}
+   {Names_Present}
+   {Name_Regrets}
+   {Next_Date} 
+   {Next_Location}
+   {Next_Time}
+ }
+   */  
+  
+  
+/*              //  TESTING
+                //--------------
+                var meeting = {
+                  //this is where to pull properties
+                  location: '- Online Zoom Meeting',
+                  startTime: '5:30 PM'
+                }
+                
+                var doc = DocumentApp.getActiveDocument().getBody();
+                
+                //this will be a loop through the meeting object; replacing text ForegroundColor to black; and properties pulled.
+                var found = doc.findText("{Meeting_Location}");
+                var elem = found.getElement();
+                elem.setForegroundColor("#000000");
+                doc.replaceText('{Meeting_Location}', meeting.meetingLocation);     
+                var found2 = doc.findText("{Meeting_startTime}");
+                var elem2 = found2.getElement();
+                elem2.setForegroundColor("#000000");
+                doc.replaceText('{Meeting_startTime}', meeting.startTime); 
+  */
+  
+  
   
 };
 

@@ -26,6 +26,7 @@ TODO: Create a separate place to put information to reduce hardcode
       .button {
         background-color: #2980B9;
         border: none;
+        border-radius: 15px;
         color: white;
         padding: 15px 32px;
         text-align: center;
@@ -175,12 +176,12 @@ TODO: Create a separate place to put information to reduce hardcode
     
     // ------------------------- Updating Form Values -----------------------------------------------
     function updateFormValues(properties) {
-      document.getElementById('meetingLocation').value = properties.meetingLocation;
       document.getElementById('meetingDate').value = properties.meetingDate;
       document.getElementById('startTime').value = properties.startTime;
       document.getElementById('endTime').value = properties.endTime;
       document.getElementById('nextDate').value = properties.nextDate;
-      document.getElementById('nextStart').value = properties.nextStart || '17:45' ;
+      document.getElementById('nextStart').value = properties.nextStart;
+      
       //checkboxes logic; typeof the checkboxes passed by the form is string
       var selectChair = document.getElementById("meetingChair");
       var selectRecorder = document.getElementById("meetingRecorder");
@@ -218,6 +219,7 @@ TODO: Create a separate place to put information to reduce hardcode
         selectLocation.appendChild(elLoc);
         selectNextLocation.appendChild(el2Loc);
       }
+      
       document.getElementById('meetingChair').value = properties.meetingChair;
       document.getElementById('meetingRecorder').value = properties.meetingRecorder; 
       document.getElementById('meetingLocation').value = properties.meetingLocation;
@@ -241,9 +243,7 @@ TODO: Create a separate place to put information to reduce hardcode
     
     function hideSaved() {
       document.getElementById('submitButton').innerHTML = "";
-    }
-    
-    
+    }   
   </script>    
 </html>
 
