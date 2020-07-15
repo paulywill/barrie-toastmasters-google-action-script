@@ -187,34 +187,36 @@ TODO: Create a separate place to put information to reduce hardcode
       var selectLocation = document.getElementById("meetingLocation");
       var selectNextLocation = document.getElementById("nextLocation");
       
+      //based on the 7 Executive Roles
       for (i=1;i < 8; i++){
         if (properties['role'+i+'Hidden'] == 'true'){
           document.getElementById('role'+i).checked = true
         }
         
         //populate roles dropdown boxes; had to create two option elements
-        var opt = properties['settingRole'+i];
+        var optRole = properties['settingRole'+i];
         var elRole = document.createElement("option");
         var el2Role = document.createElement("option");
-        elRole.textContent = opt;
-        elRole.value = opt;
-        el2Role.textContent = opt;
-        el2Role.value = opt;
+        elRole.textContent = optRole;
+        elRole.value = optRole;
+        el2Role.textContent = optRole;
+        el2Role.value = optRole;
         selectRecorder.appendChild(elRole);
         selectChair.appendChild(el2Role);
-        
-        //populate location dropdown box
+      }
+      
+      //based on 5 default location; TODO: create option to add more
+      for (i=1;i < 6; i++){
+      //populate location dropdown box
         var optLoc = properties['settingLocation'+i];
         var elLoc = document.createElement("option");
         var el2Loc = document.createElement("option");
-        elLoc.textContent = opt;
-        elLoc.value = opt;
-        el2Loc.textContent = opt;
-        el2Loc.value = opt;
+        elLoc.textContent = optLoc;
+        elLoc.value = optLoc;
+        el2Loc.textContent = optLoc;
+        el2Loc.value = optLoc;
         selectLocation.appendChild(elLoc);
         selectNextLocation.appendChild(el2Loc);
-        
-        
       }
       document.getElementById('meetingChair').value = properties.meetingChair;
       document.getElementById('meetingRecorder').value = properties.meetingRecorder; 

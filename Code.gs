@@ -77,13 +77,14 @@ function settingsInput(form) {
   Logger.log('settingsInput');
   Logger.log(form);
   //sp.setProperty('meetingLocation', form.meetingLocation);
-  for (i = 1; i <8; i++){
-    sp.setProperty('settingRole'+i, form['settingRole'+i]);    
+  for (i = 1; i < 8; i++){
+    sp.setProperty('settingRole'+i, form['settingRole'+i]);     
   }
 
-  for (i = 1; i <8; i++){
-    sp.setProperty('settingLocation'+i, form['settingLocation'+i]);    
-  }
+  for (i = 1; i < 6; i++){
+     sp.setProperty('settingLocation'+i, form['settingLocation'+i]);    
+  }  
+  
 }
 
 // --------------- Returns Array of All Properties  ---------------------
