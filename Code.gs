@@ -17,6 +17,8 @@
 //ref: https://stackoverflow.com/questions/51689943/sp-userproperties-had-been-deprecated
 var sp = PropertiesService.getScriptProperties();
 
+
+
 function replaceText(){
   var meeting = {
     //this is where to pull properties
@@ -44,14 +46,15 @@ function onOpen(e){
   DocumentApp.getUi()
   .createMenu("TM Executive Meeting Helper")
   .addItem('Meeting details', 'showDetails')
-  .addItem('Tasks', 'showTasks')
+  .addItem('Items/Tasks', 'showTasks')
   .addSeparator()
   .addItem('Settings', 'showSettings')
+  .addItem('Delete data', 'deleteData')
   .addItem('Help', 'showHelp')
       .addToUi();
 }
 
-// ------------------------ Save Meeting Details  ------------------------
+// ------------------------ Save Details  ------------------------
 function meetingInput(form) {
   Logger.log('meetingInput');
   Logger.log(form);
@@ -67,17 +70,20 @@ function meetingInput(form) {
   for (i = 1; i <8; i++){
     sp.setProperty('role'+i+'Hidden', form['role'+i+'Hidden']);    
   }  
-  
-  
 }
 
+// ------------------------ Save Settings  -----------------------
 function settingsInput(form) {
   Logger.log('settingsInput');
   Logger.log(form);
   //sp.setProperty('meetingLocation', form.meetingLocation);
   for (i = 1; i <8; i++){
-    sp.setProperty('setting'+i, form['setting'+i]);    
-  }  
+    sp.setProperty('settingRole'+i, form['settingRole'+i]);    
+  }
+
+  for (i = 1; i <8; i++){
+    sp.setProperty('settingLocation'+i, form['settingLocation'+i]);    
+  }
 }
 
 // --------------- Returns Array of All Properties  ---------------------
@@ -90,8 +96,6 @@ function getAllProperties() {
   }
   return propertiesAndKeys;
 }
-
-
 
 function showDetails() {
   var html = HtmlService.createHtmlOutputFromFile('detailsSidebar')
@@ -130,5 +134,8 @@ function waitSeconds() {
   Utilities.sleep(6000);
 }
 
-
+// Deletes all properties
+function deleteData() {
+  sp.deleteAllProperties();
+}
 

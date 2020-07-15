@@ -72,11 +72,6 @@ TODO: Create a separate place to put information to reduce hardcode
         <div class="dataInput">
           <label>Location:</label>
           <select id="meetingLocation" name="meetingLocation">
-            <option value="Zoom">Zoom</option>
-            <option value="BDAR">BDAR</option>
-            <option value="CoffeeShop">CoffeeShop</option>
-            <option value="Library">Library</option>
-            <option value="House">House</option>
           </select><br>
         </div>
         
@@ -140,7 +135,7 @@ TODO: Create a separate place to put information to reduce hardcode
             <li>
               <input type="checkbox" id="role7" name="role7" >
               <input type="hidden" id="role7Hidden" name="role7Hidden" value="" >
-              <label for="pr">Secretary</label><br>
+              <label for="pr">Secretary</label>
             </li>
           </ul>  
         </div>
@@ -149,11 +144,6 @@ TODO: Create a separate place to put information to reduce hardcode
         <div class="dataInput">
           <label>Location:</label>
           <select id="nextLocation" name="nextLocation">
-            <option value="Zoom">Zoom</option>
-            <option value="BDAR">BDAR</option>
-            <option value="CoffeeShop">CoffeeShop</option>
-            <option value="Library">Library</option>
-            <option value="House">House</option>
           </select><br> 
           <label>Date:</label>
           <input type="date" id="nextDate" name="nextDate"value=""min="2020-01-01" max="2030-12-31"><br>
@@ -185,34 +175,51 @@ TODO: Create a separate place to put information to reduce hardcode
     
     // ------------------------- Updating Form Values -----------------------------------------------
     function updateFormValues(properties) {
-      document.getElementById('meetingLocation').value = properties.meetingLocation || 'Zoom';
+      document.getElementById('meetingLocation').value = properties.meetingLocation;
       document.getElementById('meetingDate').value = properties.meetingDate;
       document.getElementById('startTime').value = properties.startTime;
       document.getElementById('endTime').value = properties.endTime;
-      document.getElementById('nextLocation').value = properties.nextLocation || 'Zoom' ;
       document.getElementById('nextDate').value = properties.nextDate;
       document.getElementById('nextStart').value = properties.nextStart || '17:45' ;
       //checkboxes logic; typeof the checkboxes passed by the form is string
       var selectChair = document.getElementById("meetingChair");
       var selectRecorder = document.getElementById("meetingRecorder");
+      var selectLocation = document.getElementById("meetingLocation");
+      var selectNextLocation = document.getElementById("nextLocation");
+      
       for (i=1;i < 8; i++){
         if (properties['role'+i+'Hidden'] == 'true'){
           document.getElementById('role'+i).checked = true
         }
         
-        //populate dropdown boxes
-        var opt = properties['setting'+i];
-        var el = document.createElement("option");
-        var el2 = document.createElement("option");
-        el.textContent = opt;
-        el.value = opt;
-        el2.textContent = opt;
-        el2.value = opt;
-        selectRecorder.appendChild(el);
-        selectChair.appendChild(el2);
+        //populate roles dropdown boxes; had to create two option elements
+        var opt = properties['settingRole'+i];
+        var elRole = document.createElement("option");
+        var el2Role = document.createElement("option");
+        elRole.textContent = opt;
+        elRole.value = opt;
+        el2Role.textContent = opt;
+        el2Role.value = opt;
+        selectRecorder.appendChild(elRole);
+        selectChair.appendChild(el2Role);
+        
+        //populate location dropdown box
+        var optLoc = properties['settingLocation'+i];
+        var elLoc = document.createElement("option");
+        var el2Loc = document.createElement("option");
+        elLoc.textContent = opt;
+        elLoc.value = opt;
+        el2Loc.textContent = opt;
+        el2Loc.value = opt;
+        selectLocation.appendChild(elLoc);
+        selectNextLocation.appendChild(el2Loc);
+        
+        
       }
       document.getElementById('meetingChair').value = properties.meetingChair;
       document.getElementById('meetingRecorder').value = properties.meetingRecorder; 
+      document.getElementById('meetingLocation').value = properties.meetingLocation;
+      document.getElementById('nextLocation').value = properties.nextLocation;
     }
       
     // ------------------------------------  Submitting Form  --------------------------------------    
