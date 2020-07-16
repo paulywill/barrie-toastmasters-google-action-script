@@ -12,6 +12,10 @@
 
 var sp = PropertiesService.getScriptProperties();
 
+
+
+
+// ------------------------ Replace Placeholders  -----------------------
 function replaceText(){  
 /* 
    PLACEHOLDERS           PROPERTIES AND TEST DATA  
@@ -37,7 +41,6 @@ function replaceText(){
    {Next_Date}            nextDate=2020-09-01 
    {Next_Location}        nextLocation=Zoom 
    {Next_Time}            nextStart=17:45   
-
 */
   
   Logger.log('replaceText');
@@ -99,6 +102,41 @@ function replaceText(){
     
 };
 
+// ------------------------ Submit Item to Table  -----------------------
+function submitItem(form) {
+  Logger.log('submitItem');
+  // Append a paragraph, then place the user's cursor after the first word of the new paragraph.
+  //var doc = DocumentApp.getActiveDocument();
+  //var paragraph = doc.getBody().appendParagraph('My new paragraph.');
+  //var position = doc.newPosition(paragraph.getChild(0), 2);
+  //doc.setCursor(position);
+ 
+  let doc = DocumentApp.getActiveDocument().getBody();
+  var cells = ["one", "two", "three", "four", "five"];  
+  let tables = doc.getTables()
+  let table0 = tables[0] 
+  let table1 = tables[1]
+  
+  //var foundTable = doc.findText('{Item_Entry}');
+  //doc.replaceText('{Item_Entry}', ''); 
+  
+
+  //var addRow1 = table1.appendTableRow();
+  var addRow1 = table1.insertTableRow(1, );
+  
+  cells.forEach(function(e, i){
+    addRow1.insertTableCell(i, e);
+  });
+  
+  var tableStyle = {};
+  tableStyle[DocumentApp.Attribute.BORDER_WIDTH] = 1; 
+  tableStyle[DocumentApp.Attribute.BORDER_COLOR] = '#000000';
+  table1.setAttributes(tableStyle);
+ 
+}
+
+
+// ------------------------ Create Menu --------------------------
 function onOpen(e){ 
   DocumentApp.getUi()
   .createMenu("TM Executive Meeting Helper")
@@ -148,26 +186,12 @@ function settingsInput(form) {
 function itemInput(form) {
   Logger.log('itemInput');
   Logger.log(form);
-  
-  // TESTING: example data 
-  //========================================================================================================================
-  //{itemAction=Remove watercooler ASAP!, itemPoints=- not great
-  //- rusty, itemDate=2020-07-21, itemTitle=watercooler, itemLeadStaff=[Fleurette Knaggs, Jennifer Keresztesi, Paul Gamble]}
-  //========================================================================================================================
-  
+  //set properties for all the item details
   sp.setProperty('itemTitle', form.itemTitle);
   sp.setProperty('itemPoints', form.itemPoints);
   sp.setProperty('itemAction', form.itemAction); 
   sp.setProperty('itemDate', form.itemDate);
   sp.setProperty('itemLeadStaff', form.itemLeadStaff);
-  
-  //TESTING---------------------------------
-  
-  let properties =  getAllProperties();
-  Logger.log('properties');
-  Logger.log(properties);
-  
-  //TESTING---------------------------------
   
 }
 
@@ -184,6 +208,8 @@ function getAllProperties() {
   return propertiesAndKeys;
 }
 
+
+// --------------- Show Meeting Details Sidebar  ------------------------
 function showDetails() {
   var html = HtmlService.createHtmlOutputFromFile('detailsSidebar')
       .setTitle('Meeting Details')
@@ -192,6 +218,7 @@ function showDetails() {
       .showSidebar(html);
 }
 
+// --------------- Show Item/Tasks Sidebar  -----------------------------
 function showTasks() {
   var html = HtmlService.createHtmlOutputFromFile('tasksSidebar')
       .setTitle('Tasks')
@@ -200,6 +227,7 @@ function showTasks() {
       .showSidebar(html);
 }
 
+// --------------- Open Item/Tasks Popup Dialog  ------------------------
 function showDialog() {
   var html = HtmlService.createHtmlOutputFromFile('taskDialog')
       .setWidth(600)
@@ -208,6 +236,7 @@ function showDialog() {
       .showModalDialog(html, 'Item/Tasks');
 }
 
+// --------------- Show Settings Sidebar  -------------------------------
 function showSettings() {
   var html = HtmlService.createHtmlOutputFromFile('settingsSidebar')
       .setTitle('Settings')
@@ -216,6 +245,7 @@ function showSettings() {
       .showSidebar(html);
 }
 
+// --------------- Show Help Sidebar  -----------------------------------
 function showHelp() {
   var html = HtmlService.createHtmlOutputFromFile('helpSidebar')
       .setTitle('Help')
@@ -224,15 +254,18 @@ function showHelp() {
       .showSidebar(html);
 }
 
+// --------------- Wait Function  ---------------------------------------
 // Limits the Saved message in the sidebar to 6 seconds
 function waitSeconds() {
   Utilities.sleep(6000);
 }
 
+// --------------- Delete all saved data  -------------------------------
 // Deletes all properties
 function deleteData() {
   sp.deleteAllProperties();
 }
+
 
 //format date for readability; ref ~ https://stackoverflow.com/a/31732581
 function formatDate(ISOdate) {
