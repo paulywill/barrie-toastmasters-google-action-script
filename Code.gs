@@ -149,6 +149,26 @@ function itemInput(form) {
   Logger.log('itemInput');
   Logger.log(form);
   
+  // TESTING: example data 
+  //========================================================================================================================
+  //{itemAction=Remove watercooler ASAP!, itemPoints=- not great
+  //- rusty, itemDate=2020-07-21, itemTitle=watercooler, itemLeadStaff=[Fleurette Knaggs, Jennifer Keresztesi, Paul Gamble]}
+  //========================================================================================================================
+  
+  sp.setProperty('itemTitle', form.itemTitle);
+  sp.setProperty('itemPoints', form.itemPoints);
+  sp.setProperty('itemAction', form.itemAction); 
+  sp.setProperty('itemDate', form.itemDate);
+  sp.setProperty('itemLeadStaff', form.itemLeadStaff);
+  
+  //TESTING---------------------------------
+  
+  let properties =  getAllProperties();
+  Logger.log('properties');
+  Logger.log(properties);
+  
+  //TESTING---------------------------------
+  
 }
 
 

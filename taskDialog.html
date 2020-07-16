@@ -54,6 +54,9 @@
         cursor: pointer;
       }
        
+      .control-panel{
+         margin: auto; text-align: center; 
+      }
        
       .dataInput {
         background: #f1f2ee;
@@ -80,6 +83,7 @@
         border-style: solid;
         border-width: 2px;
         border-color: #c3d5d8;
+        margin: auto; text-align: center;
       }
        
       .push {
@@ -99,35 +103,38 @@
       <div> 
         <form id="itemForm">
           <div>
-            <label for="item">Item to be discussed: </label><br>
-            <textarea id="item" name="item" rows="2" cols="60"></textarea>
+            <label for="itemTitle">Item to be discussed: </label><br>
+            <textarea id="itemTitle" name="itemTitle" rows="2" cols="60"></textarea>
           </div>
           <div>  
-            <label for="points">Points discussed: </label><br>
-            <textarea id="points" name="points" rows="7" cols="60"></textarea>
+            <label for="itemPoints">Points discussed: </label><br>
+            <textarea id="itemPoints" name="itemPoints" rows="7" cols="60"></textarea>
           </div>
           <div>
-            <label for="item">Action: </label><br>
-            <textarea id="action" name="action" rows="3" cols="60"></textarea>
+            <label for="itemAction">Action: </label><br>
+            <textarea id="itemAction" name="itemAction" rows="3" cols="60"></textarea>
           </div>
           <div class="box-inner">
             <div class="push"></div>
             <div>
-              <label>Date of completion:</label><br>
+              <label for="itemDate">Date of completion:</label><br>
               <input type="date" id="itemDate" name="itemDate" value=""min="2020-01-01" max="2030-12-31">
             </div>
             <div class="push"></div>
             <div>
-              <div><label for="leadStaff">Lead staff* :</label></div>     
+              <div><label for="itemLeadStaff">Lead staff* :</label></div>     
             </div>
-            <select name="leadStaff" id="leadStaff" size="7" multiple ><br>             
+            <select name="itemLeadStaff" id="itemLeadStaff" size="7" multiple ><br>             
             </select>
             <div class="tiny-message">* multiple selections allowed</div>
           </div>  
         </form>
-        <input class="button" onclick="resetForm()" type="reset" value="Reset" id="reset" />
-        <input class="button" onclick="formSubmit()" type="button" value="Save Item" id="saveItem" />
-        <input class="button" onclick="google.script.host.close()" type="button" value="Cancel" id="cancel" />
+        <div id="submitButton"></div>
+        <div class="control-panel">
+          <input class="button" onclick="resetForm()" type="reset" value="Reset" id="reset" />
+          <input class="button" onclick="formSubmit()" type="button" value="Save Item" id="saveItem" />
+          <input class="button" onclick="google.script.host.close()" type="button" value="Close" id="close" />
+        </div>  
     </div>  
      
     </div>
@@ -140,8 +147,14 @@
    
     // ------------------------- Updating Form Values ---------------
     function updateFormValues(properties) {
-      console.log("starting to populate dropdown...");
-      var selectLeadStaff = document.getElementById("leadStaff");
+     
+      document.getElementById('itemTitle').value = properties.itemTitle;
+      document.getElementById('itemPoints').value = properties.itemPoints;
+      document.getElementById('itemAction').value = properties.itemAction;
+      document.getElementById('itemDate').value = properties.itemDate;
+      document.getElementById('itemLeadStaff').value = properties.itemLeadStaff;
+       
+      var selectLeadStaff = document.getElementById("itemLeadStaff");
       //based on the 7 Executive Roles
       for (i=1;i < 8; i++){
         //populate roles dropdown boxes; had to create two option elements
@@ -158,7 +171,7 @@
     function formSubmit() {
     
       google.script.run.itemInput(document.forms[0]);
-      document.getElementById('submitButton').innerHTML = "<div class='messageOutput'>Saved</div>";
+      document.getElementById('submitButton').innerHTML = "<div class='messageOutput'>Item Details Saved</div>";
       google.script.run.withSuccessHandler(hideSaved).waitSeconds();
     }
     
@@ -170,6 +183,8 @@
     
     function resetForm() {
       document.getElementById('itemForm').reset();
+      google.script.run.itemInput(document.forms[0]);
+      google.script.run.withSuccessHandler(hideSaved).waitSeconds();
       google.script.run.withSuccessHandler(updateFormValues).getAllProperties();
     }
     
