@@ -103,7 +103,7 @@ function onOpen(e){
   DocumentApp.getUi()
   .createMenu("TM Executive Meeting Helper")
   .addItem('Meeting details', 'showDetails')
-  .addItem('Items/Tasks', 'showTasks')
+  .addItem('Item/Tasks', 'showTasks')
   .addSeparator()
   .addItem('Settings', 'showSettings')
   .addItem('Delete data', 'deleteData')
@@ -168,6 +168,14 @@ function showTasks() {
       .setWidth(300);
   DocumentApp.getUi() // Or DocumentApp or SlidesApp or FormApp.
       .showSidebar(html);
+}
+
+function showDialog() {
+  var html = HtmlService.createHtmlOutputFromFile('taskDialog')
+      .setWidth(600)
+      .setHeight(575);
+  DocumentApp.getUi() // Or DocumentApp or SlidesApp or FormApp.
+      .showModalDialog(html, 'Item/Tasks');
 }
 
 function showSettings() {

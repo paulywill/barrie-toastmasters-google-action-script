@@ -158,7 +158,7 @@ TODO: Create a separate place to put information to reduce hardcode
         <input class="button" type="button" value="Replace text" onclick="google.script.run.replaceText()" />
       </p> 
       <p>
-        <input type="button" value="Tasks" onclick="google.script.run.showTasks()" />
+        <input type="button" value="Item/Tasks" onclick="google.script.run.showTasks()" />
         <input type="button" value="Settings" onclick="google.script.run.showSettings()" />
         <input type="button" value="Help" onclick="google.script.run.showHelp()" />
         <input type="button" value="Close" onclick="google.script.host.close()" />
@@ -166,7 +166,7 @@ TODO: Create a separate place to put information to reduce hardcode
     </center>
   </body>
 
-<!--------------------------------- Code ------------------------------------------->
+<!--------------------------------- Code ---------------------------------------------------------------------->
   <script type="text/javascript">  
     
     //runs automatically on load
@@ -174,7 +174,7 @@ TODO: Create a separate place to put information to reduce hardcode
     
     
     
-    // ------------------------- Updating Form Values -----------------------------------------------
+    // ------------------------- Updating Form Values ---------------
     function updateFormValues(properties) {
       document.getElementById('meetingDate').value = properties.meetingDate;
       document.getElementById('startTime').value = properties.startTime;
@@ -226,7 +226,7 @@ TODO: Create a separate place to put information to reduce hardcode
       document.getElementById('nextLocation').value = properties.nextLocation;
     }
       
-    // ------------------------------------  Submitting Form  --------------------------------------    
+    // ------------------------------------  Submitting Form  ---------------  
     function formSubmit() {
       //before passing form determine which checkboxes are on
       for(i = 1; i < 8; i++){

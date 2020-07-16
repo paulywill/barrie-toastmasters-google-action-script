@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+   <base target="_top">
+    <style>
+      
+      html {
+        <!-- background: #bbdcf0; -->
+        color: black;
+        line-height: 1.5;
+        font-family: Verdana;
+      }
+ 
+      output {  
+        font-size: 200%; 
+        font-family: Helvetica Neue,Helvetica,Arial,sans-serif; 
+      }
+      
+      div {
+        /*border-style: ridge;*/
+        vertical-align: text-top;
+        padding: 5px;
+      }
+      
+      .box {
+        /*border-style: ridge;*/
+        display: flex;
+        flex-wrap: wrap;
+        
+        
+      }
+      
+      .box-inner {
+        /*border-style: ridge;*/
+        display: flex;
+        flex-wrap: wrap;
+        align-content: space-between;
+        padding: 5px;
+        
+        
+      }
+       
+      .button {
+        background-color: #2980B9;
+        border: none;
+        border-radius: 15px;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+      }
+       
+       
+      .dataInput {
+        background: #f1f2ee;
+        padding: 5px;
+        border-radius: 15px;
+        margin: 5px;
+        border-style: solid;
+        border-width: 2px;
+        border-color: #c3d5d8;
+      }
+      
+      .flex-inner {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        padding: 5px;
+      }
+       
+      .messageOutput {
+        background: #00FA9A;
+        padding: 5px;
+        border-radius: 15px;
+        margin: 5px;
+        border-style: solid;
+        border-width: 2px;
+        border-color: #c3d5d8;
+      }
+       
+      .push {
+        margin-left: 25px;;
+      }
+      
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <div> 
+        <form>
+          <div>
+            <label for="item">Item to be discussed: </label><br>
+            <textarea id="item" name="item" rows="2" cols="60"></textarea>
+          </div>
+          <div>  
+            <label for="points">Points discussed: </label><br>
+            <textarea id="points" name="points" rows="10" cols="60"></textarea>
+          </div>
+          <div>
+            <label for="item">Action: </label><br>
+            <textarea id="action" name="action" rows="5" cols="60"></textarea>
+          </div>
+          <div class="box-inner">
+            <div class="push"></div>
+            <div>
+              <label>Date of completion:</label><br>
+              <input type="date" id="itemDate" name="itemDate" value=""min="2020-01-01" max="2030-12-31">
+            </div>
+            <div class="push"></div>
+            <div>
+              <div><label for="leadStaff">Lead staff:</label></div>     
+            </div>
+            <select name="leadStaff" id="leadStaff" multiple><br>
+              <option value="Fleurette Knaggs">Fleurette Knaggs</option>
+              <option value="Dan Bell ">Dan Bell</option>
+              <option value="Three">Three</option>
+              <option value="Jennifer Keresztesi">Jennifer Keresztesi</option>
+              <option value="Shelly Grant">Shelly Grant</option>
+            </select>
+          </div>  
+        </form>
+        <input class="button" onclick="" type="button" value="Save Item" id="saveItem"></input><br>
+    </div>  
+     
+    </div>
+  </body>
+</html>
