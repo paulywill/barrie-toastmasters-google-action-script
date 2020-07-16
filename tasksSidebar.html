@@ -44,44 +44,33 @@
   <body>
     <h3>Item/Tasks</h3>
     
-    <!-- TESTING -------------------------------------
     
-      <form oninput="x.value=testDate.value">
-        <label>Completion Date:</label>
-        <input type="date" id="testDate" name="testDate"value=""min="2020-01-01" max="2030-12-31"><br>
-        <input class="button" onclick="" type="button" value="Next Meeting Date" id="x"></input><br>      
-      </form>
- 
-      <form oninput="y.value=leadStaff.value">
-        <br>
-        <label>Lead Staff:</label>
-        <select id="leadStaff" name="leadStaff">
-          <option value="">--</option>
-          <option value="One">One</option>
-          <option value="Two">Two</option>
-          <option value="Three">Three</option>
-          <option value="Four">Four</option>
-          <option value="Five">Five</option>
-          <option value="Six">Six</option>
-          <option value="Seven">Seven</option>
-        </select><br>
-        <input class="button" onclick="" type="button" value="Member's Name" id="y"></input><br>
-       </form>
-   -->      
-       
-       
-         <input class="button" onclick="google.script.run.showDialog()" type="button" value="Enter item" id="showDialog"></input>
-         <input class="button" onclick="" type="button" value="Submit" id="submit"></input><br>
+      <div>
+        <form>
         
+          <div><output name="" for=""></output></div>
+          <div><output name="" for=""></output></div>
+          <div><output name="" for=""></output></div>
+          <div><output name="" for=""></output></div>
+          <div><output name="" for=""></output></div>
+        
+        </form>
+      </div>  
     
+      <div> 
+        <input class="button" onclick="google.script.run.showDialog()" type="button" value="Enter item" id="showDialog" />
+        <input class="button" onclick="" type="button" value="Submit" id="submit" />
+      </div>  
+    
+      <div>
+        <p>
+          <input type="button" value="Details" onclick="google.script.run.showDetails()" />
+          <input type="button" value="Settings" onclick="google.script.run.showSettings()" />
+          <input type="button" value="Help" onclick="google.script.host.showHelp()" />
+          <input type="button" value="Close" onclick="google.script.host.close()" />
+       </p>
+      </div>
       
-      
-    <p>
-      <input type="button" value="Details" onclick="google.script.run.showDetails()" />
-      <input type="button" value="Settings" onclick="google.script.run.showSettings()" />
-      <input type="button" value="Help" onclick="google.script.host.showHelp()" />
-      <input type="button" value="Close" onclick="google.script.host.close()" />
-    </p>
   </body>
 </html>
 
