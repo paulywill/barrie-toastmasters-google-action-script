@@ -143,6 +143,16 @@ function settingsInput(form) {
   }  
 }
 
+
+// ------------------------ Save Item  -----------------------
+function itemInput(form) {
+  Logger.log('itemInput');
+  Logger.log(form);
+  
+}
+
+
+
 // --------------- Returns Array of All Properties  ---------------------
 function getAllProperties() {
   var propertiesAndKeys = {}

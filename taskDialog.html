@@ -86,23 +86,29 @@
         margin-left: 25px;;
       }
       
+      .tiny-message {
+        margin-left: 300px;
+        font-size: small; 
+      }
+      
+      
     </style>
   </head>
   <body>
     <div class="box">
       <div> 
-        <form>
+        <form id="itemForm">
           <div>
             <label for="item">Item to be discussed: </label><br>
             <textarea id="item" name="item" rows="2" cols="60"></textarea>
           </div>
           <div>  
             <label for="points">Points discussed: </label><br>
-            <textarea id="points" name="points" rows="10" cols="60"></textarea>
+            <textarea id="points" name="points" rows="7" cols="60"></textarea>
           </div>
           <div>
             <label for="item">Action: </label><br>
-            <textarea id="action" name="action" rows="5" cols="60"></textarea>
+            <textarea id="action" name="action" rows="3" cols="60"></textarea>
           </div>
           <div class="box-inner">
             <div class="push"></div>
@@ -112,20 +118,61 @@
             </div>
             <div class="push"></div>
             <div>
-              <div><label for="leadStaff">Lead staff:</label></div>     
+              <div><label for="leadStaff">Lead staff* :</label></div>     
             </div>
-            <select name="leadStaff" id="leadStaff" multiple><br>
-              <option value="Fleurette Knaggs">Fleurette Knaggs</option>
-              <option value="Dan Bell ">Dan Bell</option>
-              <option value="Three">Three</option>
-              <option value="Jennifer Keresztesi">Jennifer Keresztesi</option>
-              <option value="Shelly Grant">Shelly Grant</option>
+            <select name="leadStaff" id="leadStaff" size="7" multiple ><br>             
             </select>
+            <div class="tiny-message">* multiple selections allowed</div>
           </div>  
         </form>
-        <input class="button" onclick="" type="button" value="Save Item" id="saveItem" /><br>
+        <input class="button" onclick="resetForm()" type="reset" value="Reset" id="reset" />
+        <input class="button" onclick="formSubmit()" type="button" value="Save Item" id="saveItem" />
+        <input class="button" onclick="google.script.host.close()" type="button" value="Cancel" id="cancel" />
     </div>  
      
     </div>
   </body>
+  <!--------------------------------- Code ---------------------------------------------------------------------->
+  <script type="text/javascript">  
+    
+    //runs automatically on load
+    google.script.run.withSuccessHandler(updateFormValues).getAllProperties();
+   
+    // ------------------------- Updating Form Values ---------------
+    function updateFormValues(properties) {
+      console.log("starting to populate dropdown...");
+      var selectLeadStaff = document.getElementById("leadStaff");
+      //based on the 7 Executive Roles
+      for (i=1;i < 8; i++){
+        //populate roles dropdown boxes; had to create two option elements
+        var optRole = properties['settingRole'+i];
+        console.log("optRole: " + optRole);
+        var elRole = document.createElement("option");
+        elRole.textContent = optRole;
+        elRole.value = optRole; 
+        selectLeadStaff.appendChild(elRole);      
+      }    
+    }
+      
+    // ------------------------  Submitting Form  --------------------  
+    function formSubmit() {
+    
+      google.script.run.itemInput(document.forms[0]);
+      document.getElementById('submitButton').innerHTML = "<div class='messageOutput'>Saved</div>";
+      google.script.run.withSuccessHandler(hideSaved).waitSeconds();
+    }
+    
+    
+    // ------------------------  Wait Messagebox   -------------------- 
+    function hideSaved() {
+      document.getElementById('submitButton').innerHTML = "";
+    }   
+    
+    function resetForm() {
+      document.getElementById('itemForm').reset();
+      google.script.run.withSuccessHandler(updateFormValues).getAllProperties();
+    }
+    
+    
+  </script>
 </html>
