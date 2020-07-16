@@ -105,25 +105,21 @@ function replaceText(){
 // ------------------------ Submit Item to Table  -----------------------
 function submitItem(form) {
   Logger.log('submitItem');
-  // Append a paragraph, then place the user's cursor after the first word of the new paragraph.
-  //var doc = DocumentApp.getActiveDocument();
-  //var paragraph = doc.getBody().appendParagraph('My new paragraph.');
-  //var position = doc.newPosition(paragraph.getChild(0), 2);
-  //doc.setCursor(position);
- 
+  
+  var properties = getAllProperties();
+  Logger.log('properties');
+  Logger.log(properties);
+  
   let doc = DocumentApp.getActiveDocument().getBody();
   var cells = ["one", "two", "three", "four", "five"];  
   let tables = doc.getTables()
-  let table0 = tables[0] 
+  
+  //Second table holds meeting items; first one the meeting details
   let table1 = tables[1]
+  doc.replaceText('{Item_Entry}', ''); 
   
-  //var foundTable = doc.findText('{Item_Entry}');
-  //doc.replaceText('{Item_Entry}', ''); 
-  
-
   //var addRow1 = table1.appendTableRow();
   var addRow1 = table1.insertTableRow(1, );
-  
   cells.forEach(function(e, i){
     addRow1.insertTableCell(i, e);
   });
