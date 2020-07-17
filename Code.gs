@@ -135,14 +135,18 @@ function submitItem(form) {
   //var addRow1 = table1.appendTableRow();
   var addRow1 = table1.insertTableRow(lastRow, );
   
+  //setup for non bold styling                                    
   var style = {};
   style[DocumentApp.Attribute.BOLD] = false;                                       
                                       
   cells.forEach(function(e, i){
     addRow1.insertTableCell(i, e);
-    var found = doc.findText(e);
-    var elem = found.getElement();
-    elem.setAttributes(style);
+    //set normal (i.e. not bold) for the first cell (TESTING)
+    if(i == 0){
+      var found = doc.findText(e);
+      var elem = found.getElement();
+      elem.setAttributes(style);
+    }
   });  
   var tableStyle = {};
   tableStyle[DocumentApp.Attribute.BORDER_WIDTH] = 1; 
@@ -228,7 +232,7 @@ function itemInput(form) {
     Logger.log('joinLeadArray: ' + joinLeadArray);
     sp.setProperty('itemLeadStaff', joinLeadArray);  
   } else {
-    sp.setProperty('itemLeadStaff',form.itemLeadStaff);  
+      sp.setProperty('itemLeadStaff', form.itemLeadStaff != null ? form.itemLeadStaff : '' );  
   }
 }
 
