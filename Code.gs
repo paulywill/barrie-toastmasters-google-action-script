@@ -12,9 +12,6 @@
 
 var sp = PropertiesService.getScriptProperties();
 
-
-
-
 // ------------------------ Replace Placeholders  -----------------------
 function replaceText(){  
 /* 
@@ -104,14 +101,26 @@ function replaceText(){
 
 // ------------------------ Submit Item to Table  -----------------------
 function submitItem(form) {
-  Logger.log('submitItem');
-  
+  Logger.log('submitItem');  
   var properties = getAllProperties();
+  
   Logger.log('properties');
   Logger.log(properties);
-  
   let doc = DocumentApp.getActiveDocument().getBody();
-  var cells = ["one", "two", "three", "four", "five"];  
+  
+  Logger.log('properties.itemLeadStaff');
+  Logger.log(properties.itemLeadStaff);
+  
+  var cells = [
+    properties.itemTitle,
+    properties.itemPoints,
+    properties.itemAction,
+    properties.itemDate,
+    properties.itemLeadStaff
+     
+  ];  
+  Logger.log('cells');
+  Logger.log(cells);
   let tables = doc.getTables()
   
   //Second table holds meeting items; first one the meeting details
@@ -122,8 +131,7 @@ function submitItem(form) {
   var addRow1 = table1.insertTableRow(1, );
   cells.forEach(function(e, i){
     addRow1.insertTableCell(i, e);
-  });
-  
+  });  
   var tableStyle = {};
   tableStyle[DocumentApp.Attribute.BORDER_WIDTH] = 1; 
   tableStyle[DocumentApp.Attribute.BORDER_COLOR] = '#000000';
@@ -178,7 +186,7 @@ function settingsInput(form) {
 }
 
 
-// ------------------------ Save Item  -----------------------
+// ------------------------ Save Item Details --------------------
 function itemInput(form) {
   Logger.log('itemInput');
   Logger.log(form);
@@ -187,8 +195,18 @@ function itemInput(form) {
   sp.setProperty('itemPoints', form.itemPoints);
   sp.setProperty('itemAction', form.itemAction); 
   sp.setProperty('itemDate', form.itemDate);
-  sp.setProperty('itemLeadStaff', form.itemLeadStaff);
+  Logger.log('form.itemLeadStaff');
+  Logger.log(form.itemLeadStaff);
   
+  var leadArray = [];
+  leadArray = form.itemLeadStaff;
+  
+  Logger.log('leadArray');
+  Logger.log(leadArray);
+  var joinLeadArray = leadArray.join(', ');  
+  Logger.log('joinLeadArray');
+  Logger.log(joinLeadArray);
+  sp.setProperty('itemLeadStaff', joinLeadArray);  
 }
 
 
