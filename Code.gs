@@ -10,6 +10,7 @@
 //   All Rights Reserved, 2019
 // ----------------------------------------------------------------------------------------
 
+//GLOBAL VARIABLES
 var sp = PropertiesService.getScriptProperties();
 
 // ------------------------ Replace Placeholders  -----------------------
@@ -65,9 +66,7 @@ function replaceText(){
       regrets.push(' ' + properties['settingRole'+i]);  
     }  
   }
-  
- 
-  
+    
   //replace {Names_Present} placeholder with array
   var foundPresent = doc.findText('{Names_Present}');
   var elemPresent = foundPresent.getElement();
@@ -150,11 +149,7 @@ function submitAndSaveItem(form) {
   //input form then submit to table
   itemInput(form);
   submitItem(form);
-  
-
 }
-
-
 
 // ------------------------ Create Menu --------------------------
 function onOpen(e){ 
@@ -201,7 +196,6 @@ function settingsInput(form) {
   }  
 }
 
-
 // ------------------------ Save Item Details --------------------
 function itemInput(form) {
   Logger.log('itemInput');
@@ -223,8 +217,6 @@ function itemInput(form) {
   }
 }
 
-
-
 // --------------- Returns Array of All Properties  ---------------------
 function getAllProperties() {
   var propertiesAndKeys = {}
@@ -235,7 +227,6 @@ function getAllProperties() {
   }
   return propertiesAndKeys;
 }
-
 
 // --------------- Show Meeting Details Sidebar  ------------------------
 function showDetails() {
@@ -304,6 +295,7 @@ function deleteData() {
   sp.deleteAllProperties();
 }
 
+// --------------- Format entries  --------------------------------------
 
 //format date for readability; ref ~ https://stackoverflow.com/a/31732581
 function formatDate(ISOdate) {
