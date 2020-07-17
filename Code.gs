@@ -66,6 +66,8 @@ function replaceText(){
     }  
   }
   
+ 
+  
   //replace {Names_Present} placeholder with array
   var foundPresent = doc.findText('{Names_Present}');
   var elemPresent = foundPresent.getElement();
@@ -115,7 +117,7 @@ function submitItem(form) {
     properties.itemTitle,
     properties.itemPoints,
     properties.itemAction,
-    properties.itemDate,
+    formatDate(properties.itemDate),
     properties.itemLeadStaff
      
   ];  
@@ -126,18 +128,40 @@ function submitItem(form) {
   //Second table holds meeting items; first one the meeting details
   let table1 = tables[1]
   doc.replaceText('{Item_Entry}', ''); 
+ 
   
+  let lastRow = table1.getNumRows();
+  Logger.log('lastRow: ' + lastRow);
   //var addRow1 = table1.appendTableRow();
-  var addRow1 = table1.insertTableRow(1, );
+  var addRow1 = table1.insertTableRow(lastRow, );
+  
+  var style = {};
+  style[DocumentApp.Attribute.BOLD] = false;                                       
+                                      
   cells.forEach(function(e, i){
     addRow1.insertTableCell(i, e);
+    var found = doc.findText(e);
+    var elem = found.getElement();
+    elem.setAttributes(style);
   });  
   var tableStyle = {};
   tableStyle[DocumentApp.Attribute.BORDER_WIDTH] = 1; 
   tableStyle[DocumentApp.Attribute.BORDER_COLOR] = '#000000';
+  //tableStyle[DocumentApp.Attribute.BOLD] = false;
   table1.setAttributes(tableStyle);
+  
  
 }
+
+// ------------------------ Submit and Save ----------------------
+function submitAndSaveItem(form) {
+  //input form then submit to table
+  itemInput(form);
+  submitItem(form);
+  
+
+}
+
 
 
 // ------------------------ Create Menu --------------------------
@@ -195,18 +219,17 @@ function itemInput(form) {
   sp.setProperty('itemPoints', form.itemPoints);
   sp.setProperty('itemAction', form.itemAction); 
   sp.setProperty('itemDate', form.itemDate);
-  Logger.log('form.itemLeadStaff');
-  Logger.log(form.itemLeadStaff);
-  
   var leadArray = [];
   leadArray = form.itemLeadStaff;
-  
-  Logger.log('leadArray');
-  Logger.log(leadArray);
-  var joinLeadArray = leadArray.join(', ');  
-  Logger.log('joinLeadArray');
-  Logger.log(joinLeadArray);
-  sp.setProperty('itemLeadStaff', joinLeadArray);  
+  Logger.log('leadArray: ' + leadArray);
+  Logger.log('Array.isArray(leadArray): '+ Array.isArray(leadArray));
+  if (Array.isArray(leadArray)){    
+    var joinLeadArray = leadArray.join(', ');  
+    Logger.log('joinLeadArray: ' + joinLeadArray);
+    sp.setProperty('itemLeadStaff', joinLeadArray);  
+  } else {
+    sp.setProperty('itemLeadStaff',form.itemLeadStaff);  
+  }
 }
 
 

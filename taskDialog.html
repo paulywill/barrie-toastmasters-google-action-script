@@ -132,7 +132,8 @@
         <div id="submitButton"></div>
         <div class="control-panel">
           <input class="button" onclick="resetForm()" type="reset" value="Reset" id="reset" />
-          <input class="button" onclick="formSubmit()" type="button" value="Save Item" id="saveItem" />
+          <!-- <input class="button" onclick="formSubmit()" type="button" value="Save Item" id="saveItem" /> -->
+          <input class="button" onclick="submitAndSaveItem()" type="button" value="Submit" id="submit" />
           <input class="button" onclick="google.script.host.close()" type="button" value="Close" id="close" />
         </div>  
     </div>  
@@ -168,9 +169,9 @@
     }
       
     // ------------------------  Submitting Form  --------------------  
-    function formSubmit() {
-    
-      google.script.run.itemInput(document.forms[0]);
+    //function formSubmit() {
+    function submitAndSaveItem(){
+      google.script.run.submitAndSaveItem(document.forms[0]);
       document.getElementById('submitButton').innerHTML = "<div class='messageOutput'>Item Details Saved</div>";
       google.script.run.withSuccessHandler(hideSaved).waitSeconds();
     }
@@ -182,6 +183,7 @@
     }   
     
     function resetForm() {
+      document.getElementById('itemForm').reset();
       document.getElementById('itemForm').reset();
       google.script.run.itemInput(document.forms[0]);
       google.script.run.withSuccessHandler(hideSaved).waitSeconds();
