@@ -87,13 +87,12 @@ function replaceText(){
     var found = doc.findText(`{${key}}`);
     var elem = found.getElement();
     elem.setForegroundColor("#000000");
-    //format date
+    
+    //format date entry for readability
     if(key == 'Meeting_Date'){
-      Logger.log('date: ' + properties[value]);
       doc.replaceText(`{${key}}`, formatDate(properties[value]));          
     }
     if(key.includes('Time')){
-      Logger.log('time: ' + properties[value]);
       doc.replaceText(`{${key}}`, formatTime(properties[value]));          
     }  
     doc.replaceText(`{${key}}`, properties[value]);   
@@ -105,13 +104,7 @@ function replaceText(){
 function submitItem(form) {
   Logger.log('submitItem');  
   var properties = getAllProperties();
-  
-  Logger.log('properties');
-  Logger.log(properties);
   let doc = DocumentApp.getActiveDocument().getBody();
-  
-  Logger.log('properties.itemLeadStaff');
-  Logger.log(properties.itemLeadStaff);
   
   var cells = [
     properties.itemTitle,
@@ -121,24 +114,18 @@ function submitItem(form) {
     properties.itemLeadStaff
      
   ];  
-  Logger.log('cells');
-  Logger.log(cells);
+
   let tables = doc.getTables()
   
   //Second table holds meeting items; first one the meeting details
   let table1 = tables[1]
   //doc.replaceText('{Item_Entry}', ''); 
- 
-  
   let lastRow = table1.getNumRows();
-  Logger.log('lastRow: ' + lastRow);
-  //var addRow1 = table1.appendTableRow();
-  var addRow1 = table1.insertTableRow(lastRow, );
+  let addRow1 = table1.insertTableRow(lastRow, );
   
   //setup for non bold styling                                    
   var style = {};
-  style[DocumentApp.Attribute.BOLD] = false;                                       
-                                      
+  style[DocumentApp.Attribute.BOLD] = false;                                                                       
   cells.forEach(function(e, i){
     addRow1.insertTableCell(i, e);
     //set normal (i.e. not bold) for the first cell (TESTING)
@@ -148,13 +135,14 @@ function submitItem(form) {
       elem.setAttributes(style);
     }
   });  
+  
+  //setup for border around row
   var tableStyle = {};
   tableStyle[DocumentApp.Attribute.BORDER_WIDTH] = 1; 
   tableStyle[DocumentApp.Attribute.BORDER_COLOR] = '#000000';
   //tableStyle[DocumentApp.Attribute.BOLD] = false;
   table1.setAttributes(tableStyle);
   
- 
 }
 
 // ------------------------ Submit and Save ----------------------
@@ -223,13 +211,12 @@ function itemInput(form) {
   sp.setProperty('itemPoints', form.itemPoints);
   sp.setProperty('itemAction', form.itemAction); 
   sp.setProperty('itemDate', form.itemDate);
+  
+  //logic for selecting more than one lead staff
   var leadArray = [];
   leadArray = form.itemLeadStaff;
-  Logger.log('leadArray: ' + leadArray);
-  Logger.log('Array.isArray(leadArray): '+ Array.isArray(leadArray));
   if (Array.isArray(leadArray)){    
     var joinLeadArray = leadArray.join(', ');  
-    Logger.log('joinLeadArray: ' + joinLeadArray);
     sp.setProperty('itemLeadStaff', joinLeadArray);  
   } else {
       sp.setProperty('itemLeadStaff', form.itemLeadStaff != null ? form.itemLeadStaff : '' );  
