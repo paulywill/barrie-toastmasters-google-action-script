@@ -127,7 +127,7 @@ function submitItem(form) {
   
   //Second table holds meeting items; first one the meeting details
   let table1 = tables[1]
-  doc.replaceText('{Item_Entry}', ''); 
+  //doc.replaceText('{Item_Entry}', ''); 
  
   
   let lastRow = table1.getNumRows();
