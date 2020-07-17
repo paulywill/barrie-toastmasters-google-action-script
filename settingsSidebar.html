@@ -33,7 +33,7 @@
         border-top: 1px solid #d0d0d0;
       }
       
-      .bigButton {
+      .Button {
         background-color: #2980B9;
         border: none;
         border-radius: 15px;
@@ -132,7 +132,8 @@
       </form> 
       <div id="submitButton"></div>
       <p>
-        <input class="bigButton" type="button" value="Save" onclick="formSubmit()" />
+        <input class="Button" type="button" value="Save" onclick="formSubmit()" />
+        <input class="Button" type="button" value="Email PDF Copy" onclick="google.script.run.showEmailDialog()" />
       </p>     
       <p>
         <input type="button" value="Details" onclick="google.script.run.showDetails()" />

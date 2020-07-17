@@ -269,12 +269,22 @@ function showTasks() {
 }
 
 // --------------- Open Item/Tasks Popup Dialog  ------------------------
-function showDialog() {
+function showTaskDialog() {
   var html = HtmlService.createHtmlOutputFromFile('taskDialog')
       .setWidth(600)
       .setHeight(575);
   DocumentApp.getUi() // Or DocumentApp or SlidesApp or FormApp.
       .showModalDialog(html, 'Item/Tasks');
+}
+
+
+// --------------- Open Item/Tasks Popup Dialog  ------------------------
+function showEmailDialog() {
+  var html = HtmlService.createHtmlOutputFromFile('emailDialog')
+      .setWidth(500)
+      .setHeight(300);
+  DocumentApp.getUi() // Or DocumentApp or SlidesApp or FormApp.
+      .showModalDialog(html, 'Email PDF Copy');
 }
 
 // --------------- Show Settings Sidebar  -------------------------------
