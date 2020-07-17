@@ -22,6 +22,15 @@
         padding: 5px;
       }
       
+      input.disabled { 
+        color: #D3D3D3; 
+      }
+      
+      input.enabled { 
+        color: #000000; 
+      }
+      
+      
       label.disabled { 
         color: #D3D3D3; 
       }
@@ -126,12 +135,12 @@
           <div class="box-inner">
             <div class="push"></div>
             <div>
-              <label for="itemDate">Date of completion:</label><br>
-              <input type="date" id="itemDate" name="itemDate" value=""min="2020-01-01" max="2030-12-31"><br>
-              <input type="checkbox" id="done" name="done" onclick="checkboxDate()">
+              <label id="lblitemDate" for="itemDate">Date of completion:</label><br>
+              <input type="date" id="itemDate" name="itemDate" value="" min="2020-01-01" max="2030-12-31"><br>
+              <input type="checkbox" id="Done" name="Done" onclick="checkboxDate(this.name)">
               <input type="hidden" id="doneHidden" name="doneHidden" value="" >
               <label id="lblDone" for="Done">Done</label>
-              <input type="checkbox" id="asap" name="asap" >
+              <input type="checkbox" id="Asap" name="Asap" onclick="checkboxDate(this.name)">
               <input type="hidden" id="asapHidden" name="doneHidden" value="" >
               <label id="lblAsap" for="Asap">ASAP</label>
             </div>
@@ -217,13 +226,15 @@
            if(element != name){
              document.getElementById(element).disabled = true;
              document.getElementById("lbl"+element).className = "disabled";
+             document.getElementById(element).className = "disabled";
            }  
         });        
       } else {
        inputNames.forEach((element) => {
            if(element != name){
              document.getElementById(element).disabled = false;
-             document.getElementById("lbl"+element").className = "enabled";
+             document.getElementById("lbl"+element).className = "enabled";
+             document.getElementById(element).className = "enabled";
            }  
         });
       }
