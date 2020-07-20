@@ -119,7 +119,7 @@
   <body>
     <div class="box">
       <div> 
-        <form id="itemForm">
+        <form class="form" id="itemForm">
           <div>
             <label for="itemTitle">Item to be discussed: </label><br>
             <textarea id="itemTitle" name="itemTitle" rows="2" cols="60"></textarea>
@@ -136,12 +136,12 @@
             <div class="push"></div>
             <div>
               <label id="lblitemDate" for="itemDate">Date of completion:</label><br>
-              <input type="date" id="itemDate" name="itemDate" value="" min="2020-01-01" max="2030-12-31"><br>
+              <input type="date" id="itemDate" name="itemDate" value="" min="2020-01-01" max="2050-12-31"><br>
               <input type="checkbox" id="Done" name="Done" onclick="checkboxDate(this.name)">
-              <input type="hidden" id="doneHidden" name="doneHidden" value="" >
+              <input type="hidden" id="DoneHidden" name="DoneHidden" value="" >
               <label id="lblDone" for="Done">Done</label>
               <input type="checkbox" id="Asap" name="Asap" onclick="checkboxDate(this.name)">
-              <input type="hidden" id="asapHidden" name="doneHidden" value="" >
+              <input type="hidden" id="AsapHidden" name="AsapHidden" value="" >
               <label id="lblAsap" for="Asap">ASAP</label>
             </div>
             <div class="push"></div>
@@ -177,7 +177,7 @@
       document.getElementById('itemPoints').value = properties.itemPoints;
       document.getElementById('itemAction').value = properties.itemAction;
       document.getElementById('itemDate').value = properties.itemDate;
-      document.getElementById('itemLeadStaff').value = properties.itemLeadStaff;
+      //document.getElementById('itemLeadStaff').value = properties.itemLeadStaff;
        
       var selectLeadStaff = document.getElementById("itemLeadStaff");
       //based on the 7 Executive Roles
@@ -189,6 +189,22 @@
         elRole.value = optRole; 
         selectLeadStaff.appendChild(elRole);      
       }    
+      
+      //TODO:
+      //--------------------------------------------------
+      //update selection on dropdown box
+      //if(Array.isArray(properties.itemLeadStaff)){
+            
+      //} else{
+           
+      //}
+      
+      //Update the date value or checkbox option
+      //if( ){
+            
+      //}
+      
+      
     }
       
     // ------------------------  Submitting Form  --------------------  
@@ -215,6 +231,25 @@
     
      // ------------------------  Checkbox Logic for Date   ----------- 
     function checkboxDate(name) {
+      
+      //TODO: pass the value "Done" or "ASAP" is using checkbox instead of date input
+      // script similar to submit to change properties value or something to subsitute dateinput before form submission.
+      // One solution seems smarter to keep it locally.
+      
+      console.log("name: "+ name);
+     
+       //TESTING
+        let x = document.querySelector('form.form').elements;
+        
+        console.log("FORM BEFORE");
+        console.log("============");
+        console.log("DoneHidden: ", x['DoneHidden'].value);
+        console.log("AsapHidden: ", x['AsapHidden'].value);
+        console.log("====================================================");
+      
+      
+      
+      
       // Get the checkbox
       var dateDone = document.getElementById(name);
       var inputNames = ['Done','Asap','itemDate'];
@@ -222,22 +257,57 @@
       // If the checkbox is checked, toggle
       if (dateDone.checked == true){
         inputNames.forEach((element) => {
-           if(element != name){
-             document.getElementById(element).disabled = true;
-             document.getElementById("lbl"+element).className = "disabled";
-             document.getElementById(element).className = "disabled";
-           }  
-        });        
+          console.log("element: "+ element);
+          //grey out the other options for date if checked
+          if(element != name){
+            document.getElementById(element).disabled = true;
+            document.getElementById("lbl"+element).className = "disabled";
+            document.getElementById(element).className = "disabled";
+            if(element != "itemDate"){
+              document.getElementById(element + "Hidden").value = false;
+              console.log(" document.getElementById("+ element +"Hidden): " + document.getElementById(element +"Hidden").value)
+            }
+            
+          }else{
+            if(element != "itemDate"){
+              document.getElementById(element +"Hidden").value = true;
+              console.log(" document.getElementById("+ element +"Hidden): " + document.getElementById(element +"Hidden").value)
+            }
+            
+          }
+                   
+      });        
       } else {
+       //make the other options for date visible if not checked
        inputNames.forEach((element) => {
            if(element != name){
              document.getElementById(element).disabled = false;
              document.getElementById("lbl"+element).className = "enabled";
              document.getElementById(element).className = "enabled";
-           }  
+             if(element != "itemDate"){
+               document.getElementById(element + "Hidden").value = false;
+               console.log(" document.getElementById("+ element +"Hidden): " + document.getElementById(element +"Hidden").value)
+             }
+           } else {
+               if(element != "itemDate"){
+                 document.getElementById(element +"Hidden").value = false;
+                 console.log(" document.getElementById("+ element +"Hidden): " + document.getElementById(element +"Hidden").value)
+               }
+           }
         });
       }
-}
+      
+      
+      
+      //TESTING
+        let f = document.querySelector('form.form').elements;
+        
+        console.log("FORM AFTER");
+        console.log("============");
+        console.log("DoneHidden: ", f['DoneHidden'].value);
+        console.log("AsapHidden: ", f['AsapHidden'].value);
+        console.log("====================================================");
+  }    
     
     
   </script>

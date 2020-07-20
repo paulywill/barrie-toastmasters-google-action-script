@@ -104,12 +104,24 @@ function submitItem(form) {
   Logger.log('submitItem');  
   var properties = getAllProperties();
   let doc = DocumentApp.getActiveDocument().getBody();
+  var inputNames = ['Done','Asap'];  
+  let itemDateOption;
+  
+  Logger.log('properties.itemDate: ' + properties.itemDate);
+  
+  if(properties.itemDate == 'Done' || 'Asap'){
+    Logger.log("There's a match.");
+    itemDateOption = properties.itemDate;
+  }else{
+    Logger.log("Date Format");
+    itemDateOption = formatDate(properties.itemDate);    
+  }  
   
   var cells = [
     properties.itemTitle,
     properties.itemPoints,
     properties.itemAction,
-    formatDate(properties.itemDate),
+    itemDateOption,   
     properties.itemLeadStaff
      
   ];  
@@ -200,12 +212,29 @@ function settingsInput(form) {
 function itemInput(form) {
   Logger.log('itemInput');
   Logger.log(form);
+  
+  if(form.itemDate !== null && form.itemDate !== ''){
+    itemDate = form.itemDate;    
+  }  
+  
   //set properties for all the item details
   sp.setProperty('itemTitle', form.itemTitle);
   sp.setProperty('itemPoints', form.itemPoints);
   sp.setProperty('itemAction', form.itemAction); 
-  sp.setProperty('itemDate', form.itemDate);
+   
+  //logic for if the 'Done' or 'Asap' checkboxes are selected instead of date input
   
+  if(form.DoneHidden == 'true' | form.AsapHidden == 'true'){
+    if(form.DoneHidden == 'true'){
+      sp.setProperty('itemDate', 'Done');   
+    } else if(form.AsapHidden == 'true'){
+      sp.setProperty('itemDate', 'Asap');
+    }  
+  } else{
+    sp.setProperty('itemDate', form.itemDate);   
+  }
+ 
+   
   //logic for selecting more than one lead staff
   var leadArray = [];
   leadArray = form.itemLeadStaff;
