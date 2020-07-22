@@ -8,11 +8,15 @@ Document Template (make a copy to edit): https://docs.google.com/document/d/16Il
 ## Added Menu 
 The added dropdown menu to display different options in the sidebar (right-side of screen).
   
-  ![Menu](scr_shot1.png)
+  ![menu](scr_shot1.png)
 
 ## Settings
 You can set the name of the club's executive which will populate dropdown boxes and other options.
 
+  ![settings](scr_shot3.png)
 
-  ![Menu](scr_shot3.png)
-  ![Menu](scr_shot4.png)
+## Item/Details Dialog
+
+The main function for the **TM Executive Meeting Helper** is the _Item/Tasks_ dialog. Here quick entries are added to the document-template's table.
+
+![details](scr_shot4.png)
