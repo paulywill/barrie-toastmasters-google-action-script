@@ -4,9 +4,7 @@
    <base target="_top">
     <style>
       
-      html {
-        <!-- background: #bbdcf0; -->
-        color: black;
+      html {     
         line-height: 1.5;
         font-family: Verdana;
       }
@@ -17,7 +15,6 @@
       }
       
       div {
-        /*border-style: ridge;*/
         vertical-align: text-top;
         padding: 5px;
       }
@@ -30,7 +27,20 @@
         color: #000000; 
       }
       
+      input:required {
+        color: red;
+      }
       
+      .form input:required,
+      textarea:required {
+        border-color: green !important;
+      }
+      
+      .form input:required,
+      textarea:invalid {
+        border-color: red !important;
+      }
+     
       label.disabled { 
         color: #D3D3D3; 
       }
@@ -39,23 +49,21 @@
         color: #000000; 
       }
       
-      
+      span.red {
+        color: red;
+      }
+        
       .box {
-        /*border-style: ridge;*/
         display: flex;
-        flex-wrap: wrap;
-        
-        
+        flex-wrap: wrap;       
       }
       
       .box-inner {
-        /*border-style: ridge;*/
         display: flex;
         flex-wrap: wrap;
         align-content: space-between;
         padding: 5px;
-        
-        
+               
       }
        
       .button {
@@ -111,25 +119,26 @@
       .tiny-message {
         margin-left: 300px;
         font-size: small; 
+        text-align: right;
       }
-      
-      
+           
     </style>
   </head>
   <body>
     <div class="box">
       <div> 
         <form class="form" id="itemForm">
-          <div>
-            <label for="itemTitle">Item to be discussed: </label><br>
-            <textarea id="itemTitle" name="itemTitle" rows="2" cols="60"></textarea>
-          </div>
           <div>  
-            <label for="itemPoints">Points discussed: </label><br>
-            <textarea id="itemPoints" name="itemPoints" rows="7" cols="60"></textarea>
+            <div class="tiny-message"><span class="red">*</span> indicated required</div>
+            <label for="itemTitle">Item to be discussed<span class="red">*</span> : </label><br>
+            <textarea id="itemTitle" name="itemTitle" rows="2" cols="60" required></textarea>
           </div>
           <div>
-            <label for="itemAction">Action: </label><br>
+            <label for="itemPoints">Points discussed<span class="red">*</span> : </label><br>
+            <textarea id="itemPoints" name="itemPoints" rows="7" cols="60" required></textarea>
+          </div>
+          <div>
+            <label for="itemAction">Action : </label><br>
             <textarea id="itemAction" name="itemAction" rows="3" cols="60"></textarea>
           </div>
           <div class="box-inner">
@@ -146,11 +155,11 @@
             </div>
             <div class="push"></div>
             <div>
-              <div><label for="itemLeadStaff">Lead staff* :</label></div>     
+              <div><label for="itemLeadStaff">Lead staff :</label></div>     
             </div>
             <select name="itemLeadStaff" id="itemLeadStaff" size="7" multiple ><br>             
             </select>
-            <div class="tiny-message">* multiple selections allowed</div>
+            <div class="tiny-message">(multiple selections allowed)</div>
           </div>  
         </form>
         <div id="submitButton"></div>
@@ -207,12 +216,24 @@
       
     }
       
+  
     // ------------------------  Submitting Form  --------------------  
     //function formSubmit() {
     function submitAndSaveItem(){
-      google.script.run.submitAndSaveItem(document.forms[0]);
-      document.getElementById('submitButton').innerHTML = "<div class='messageOutput'>Item Details Saved</div>";
-      google.script.run.withSuccessHandler(hideSaved).waitSeconds();
+      
+      var form = document.forms[0];
+      console.log("form.itemTitle.value: "+form.itemTitle.value);
+      
+      //Validate form
+      if ((form.itemTitle.value == null || form.itemTitle.value == "") || (form.itemPoints.value == null || form.itemPoints.value == "")) {
+        alert("Please fill all required fields.");
+        return false;
+      } else {
+       
+        google.script.run.submitAndSaveItem(form);
+        document.getElementById('submitButton').innerHTML = "<div class='messageOutput'>Item Details Saved</div>";
+        google.script.run.withSuccessHandler(hideSaved).waitSeconds();
+      }
     }
     
     
@@ -231,25 +252,7 @@
     
      // ------------------------  Checkbox Logic for Date   ----------- 
     function checkboxDate(name) {
-      
-      //TODO: pass the value "Done" or "ASAP" is using checkbox instead of date input
-      // script similar to submit to change properties value or something to subsitute dateinput before form submission.
-      // One solution seems smarter to keep it locally.
-      
-      console.log("name: "+ name);
-     
-       //TESTING
-        let x = document.querySelector('form.form').elements;
-        
-        console.log("FORM BEFORE");
-        console.log("============");
-        console.log("DoneHidden: ", x['DoneHidden'].value);
-        console.log("AsapHidden: ", x['AsapHidden'].value);
-        console.log("====================================================");
-      
-      
-      
-      
+         
       // Get the checkbox
       var dateDone = document.getElementById(name);
       var inputNames = ['Done','Asap','itemDate'];
@@ -296,17 +299,6 @@
            }
         });
       }
-      
-      
-      
-      //TESTING
-        let f = document.querySelector('form.form').elements;
-        
-        console.log("FORM AFTER");
-        console.log("============");
-        console.log("DoneHidden: ", f['DoneHidden'].value);
-        console.log("AsapHidden: ", f['AsapHidden'].value);
-        console.log("====================================================");
   }    
     
     
