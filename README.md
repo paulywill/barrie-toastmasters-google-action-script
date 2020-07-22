@@ -16,7 +16,7 @@ You can set the names of the club's executive and the different locations the me
 
 The settings and all data are saved between sessions, unless the **Delete Data** is selected in the dropdown menu will clear out all saved properties and data.
 
-  ![details](scr_shot2.png)  ![settings](scr_shot3.png)
+  ![details](scr_shot3.png) ![settings](scr_shot2.png)  
 
 ## Item/Details Dialog
 
