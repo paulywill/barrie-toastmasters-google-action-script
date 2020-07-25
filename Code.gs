@@ -134,17 +134,14 @@ function submitItem(form) {
   let lastRow = table1.getNumRows();
   let addRow1 = table1.insertTableRow(lastRow, );
   
+
   //setup for non bold styling                                    
   var style = {};
   style[DocumentApp.Attribute.BOLD] = false;                                                                       
   cells.forEach(function(e, i){
     addRow1.insertTableCell(i, e);
     //set normal (i.e. not bold) for the first cell (TESTING)
-    if(i == 0){
-      var found = doc.findText(e);
-      var elem = found.getElement();
-      elem.setAttributes(style);
-    }
+    
   });  
   
   //setup for border around row
