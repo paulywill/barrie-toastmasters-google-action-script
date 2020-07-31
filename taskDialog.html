@@ -233,7 +233,7 @@
       } else {
        
         google.script.run.submitAndSaveItem(form);
-        document.getElementById('submitButton').innerHTML = "<div class='messageOutput'>Item Details Saved</div>";
+        document.getElementById('submitButton').innerHTML = "<div class='messageOutput'>Item Submitted</div>";
         google.script.run.withSuccessHandler(hideSaved).waitSeconds();
       }
     }
@@ -245,8 +245,12 @@
     }   
     
     function resetForm() {
-      document.getElementById('itemForm').reset();
-      document.getElementById('itemForm').reset();
+    
+      var form = document.forms[0];
+      form.reset();
+      google.script.run.itemInput(form);
+      document.getElementById('submitButton').innerHTML = "<div class='messageOutput'>Form Reset</div>";
+      
       google.script.run.itemInput(document.forms[0]);
       google.script.run.withSuccessHandler(hideSaved).waitSeconds();
       google.script.run.withSuccessHandler(updateFormValues).getAllProperties();
