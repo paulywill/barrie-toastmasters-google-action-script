@@ -161,16 +161,17 @@
             </select>
             <div class="tiny-message">(multiple selections allowed)</div>
           </div>  
-        </form>
-        <div id="submitButton"></div>
-        <div class="control-panel">
-          <input class="button" onclick="resetForm()" type="reset" value="Reset" id="reset" />
-          <!-- <input class="button" onclick="formSubmit()" type="button" value="Save Item" id="saveItem" /> -->
-          <input class="button" onclick="submitAndSaveItem()" type="button" value="Submit" id="submit" />
-          <input class="button" onclick="google.script.host.close()" type="button" value="Close" id="close" />
-        </div>  
-    </div>  
-     
+         
+          <div id="submitButton"></div>
+          <div class="control-panel">
+            <!--<input class="button" onclick="resetForm()" type="reset" value="Reset" id="reset" /> -->
+            <input class="button" onclick="resetForm()" type="reset" value="Reset" id="reset" />
+            <!-- <input class="button" onclick="formSubmit()" type="button" value="Save Item" id="saveItem" /> -->
+            <input class="button" onclick="submitAndSaveItem()" type="button" value="Submit" id="submit" />
+            <input class="button" onclick="google.script.host.close()" type="button" value="Close" id="close" />
+          </div>  
+        </form>   
+      </div>    
     </div>
   </body>
   <!--------------------------------- Code ---------------------------------------------------------------------->
@@ -238,25 +239,27 @@
       }
     }
     
-    
-    // ------------------------  Wait Messagebox   -------------------- 
+    // ------------------------  Wait Messagebox  --------------------- 
     function hideSaved() {
       document.getElementById('submitButton').innerHTML = "";
     }   
     
+    // ------------------------  Reset Form  -------------------------- 
     function resetForm() {
-    
-      var form = document.forms[0];
-      form.reset();
-      google.script.run.itemInput(form);
+      //reset checkboxes using logic from checkboxDate() function   
+      document.getElementById("Done").checked = false;
+      checkboxDate('Done');  
+      //reset dropdown by unselecting all items that are selected
+      Array.from(document.querySelector("#itemLeadStaff").options).forEach(function(option_element) {
+        let option_value = option_element.value;
+        let is_option_selected = option_element.selected; 
+        if(is_option_selected === true){ option_element.removeAttribute('selected');  } 
+      }); 
       document.getElementById('submitButton').innerHTML = "<div class='messageOutput'>Form Reset</div>";
-      
-      google.script.run.itemInput(document.forms[0]);
       google.script.run.withSuccessHandler(hideSaved).waitSeconds();
-      google.script.run.withSuccessHandler(updateFormValues).getAllProperties();
     }
     
-     // ------------------------  Checkbox Logic for Date   ----------- 
+     // ----------------------  Checkbox Logic for Date  -------------- 
     function checkboxDate(name) {
          
       // Get the checkbox
@@ -266,7 +269,6 @@
       // If the checkbox is checked, toggle
       if (dateDone.checked == true){
         inputNames.forEach((element) => {
- 
           //grey out the other options for date if checked
           if(element != name){
             document.getElementById(element).disabled = true;
@@ -274,8 +276,7 @@
             document.getElementById(element).className = "disabled";
             if(element != "itemDate"){
               document.getElementById(element + "Hidden").value = false;
-            }
-            
+            }            
           }else{
             if(element != "itemDate"){
               document.getElementById(element +"Hidden").value = true;
@@ -297,10 +298,8 @@
                  document.getElementById(element +"Hidden").value = false;
                }
            }
-        });
-      }
-  }    
-    
-    
+       });
+     }
+   }       
   </script>
 </html>

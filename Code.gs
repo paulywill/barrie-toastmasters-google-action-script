@@ -228,7 +228,9 @@ function itemInput(form) {
       sp.setProperty('itemDate', 'ASAP');
     }  
   } else{
-    sp.setProperty('itemDate', form.itemDate);   
+    if (form.itemDate){
+      sp.setProperty('itemDate', form.itemDate);   
+    }
   }
  
    
