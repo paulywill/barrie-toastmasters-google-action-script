@@ -200,10 +200,11 @@
       }    
       
       //document.getElementById('itemDate').value = properties.itemDate;
-       console.log('properties.itemDate: ' + properties.itemDate);
       if((properties.itemDate == 'ASAP' || properties.itemDate == 'Done')){
         document.getElementById(properties.itemDate).checked = true;
         checkboxDate(properties.itemDate);
+      } else {
+        document.getElementById('itemDate').value = properties.itemDate;
       }
       
       
