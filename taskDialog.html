@@ -185,9 +185,7 @@
       document.getElementById('itemTitle').value = properties.itemTitle;
       document.getElementById('itemPoints').value = properties.itemPoints;
       document.getElementById('itemAction').value = properties.itemAction;
-      
-      
-  
+       
       var selectLeadStaff = document.getElementById("itemLeadStaff");
       //based on the 7 Executive Roles
       for (i=1;i < 8; i++){
@@ -205,39 +203,28 @@
         checkboxDate(properties.itemDate);
       } else {
         document.getElementById('itemDate').value = properties.itemDate;
-      }
+      }   
       
-      
-      //document.getElementById('itemLeadStaff').value = properties.itemLeadStaff;      
-       console.log('properties.itemLeadStaff: ' + properties.itemLeadStaff);
-      
-      
-      
-      
-      //TODO:
-      //--------------------------------------------------
-      //update selection on dropdown box
-      //if(Array.isArray(properties.itemLeadStaff)){
-            
-      //} else{
-           
-      //}
-      
-      //Update the date value or checkbox option
-      //if( ){
-            
-      //}
-      
-      
+      //check and select if there's more than one name
+      if(properties.itemLeadStaff.indexOf(',') == -1){
+        document.getElementById('itemLeadStaff').value = properties.itemLeadStaff;  
+      } else {
+          document.getElementById('itemLeadStaff').value = properties.itemLeadStaff;  
+          //cycle through list of names in #itemLeadStaff and select those that match
+          Array.from(document.querySelector("#itemLeadStaff").options).forEach(function(option_element) {
+            let option_value = option_element.value;
+            if(properties.itemLeadStaff.indexOf(option_element.value) !== -1){ 
+              option_element.setAttribute('selected', 'selected');
+            }
+          });      
+       }
     }
       
-  
     // ------------------------  Submitting Form  --------------------  
     //function formSubmit() {
     function submitAndSaveItem(){
       
       var form = document.forms[0];
-      console.log("form.itemTitle.value: "+form.itemTitle.value);
       
       //Validate form
       if ((form.itemTitle.value == null || form.itemTitle.value == "") || (form.itemPoints.value == null || form.itemPoints.value == "")) {
@@ -275,8 +262,7 @@
       // If the checkbox is checked, toggle
       if (dateDone.checked == true){
         inputNames.forEach((element) => {
-          console.log("element: "+ element);
-          console.log("name: "+ name);
+ 
           //grey out the other options for date if checked
           if(element != name){
             document.getElementById(element).disabled = true;
@@ -284,17 +270,13 @@
             document.getElementById(element).className = "disabled";
             if(element != "itemDate"){
               document.getElementById(element + "Hidden").value = false;
-              console.log(" document.getElementById("+ element +"Hidden): " + document.getElementById(element +"Hidden").value)
             }
             
           }else{
             if(element != "itemDate"){
               document.getElementById(element +"Hidden").value = true;
-              console.log(" document.getElementById("+ element +"Hidden): " + document.getElementById(element +"Hidden").value)
-            }
-            
-          }
-                   
+            }            
+          }                  
       });        
       } else {
        //make the other options for date visible if not checked
@@ -305,12 +287,10 @@
              document.getElementById(element).className = "enabled";
              if(element != "itemDate"){
                document.getElementById(element + "Hidden").value = false;
-               console.log(" document.getElementById("+ element +"Hidden): " + document.getElementById(element +"Hidden").value)
              }
            } else {
                if(element != "itemDate"){
                  document.getElementById(element +"Hidden").value = false;
-                 console.log(" document.getElementById("+ element +"Hidden): " + document.getElementById(element +"Hidden").value)
                }
            }
         });
