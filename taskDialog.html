@@ -149,9 +149,9 @@
               <input type="checkbox" id="Done" name="Done" onclick="checkboxDate(this.name)">
               <input type="hidden" id="DoneHidden" name="DoneHidden" value="" >
               <label id="lblDone" for="Done">Done</label>
-              <input type="checkbox" id="Asap" name="Asap" onclick="checkboxDate(this.name)">
-              <input type="hidden" id="AsapHidden" name="AsapHidden" value="" >
-              <label id="lblAsap" for="Asap">ASAP</label>
+              <input type="checkbox" id="ASAP" name="ASAP" onclick="checkboxDate(this.name)">
+              <input type="hidden" id="ASAPHidden" name="ASAPHidden" value="" >
+              <label id="lblASAP" for="ASAP">ASAP</label>
             </div>
             <div class="push"></div>
             <div>
@@ -185,9 +185,9 @@
       document.getElementById('itemTitle').value = properties.itemTitle;
       document.getElementById('itemPoints').value = properties.itemPoints;
       document.getElementById('itemAction').value = properties.itemAction;
-      document.getElementById('itemDate').value = properties.itemDate;
-      //document.getElementById('itemLeadStaff').value = properties.itemLeadStaff;
-       
+      
+      
+  
       var selectLeadStaff = document.getElementById("itemLeadStaff");
       //based on the 7 Executive Roles
       for (i=1;i < 8; i++){
@@ -198,6 +198,17 @@
         elRole.value = optRole; 
         selectLeadStaff.appendChild(elRole);      
       }    
+      
+      //document.getElementById('itemDate').value = properties.itemDate;
+       console.log('properties.itemDate: ' + properties.itemDate);
+      if((properties.itemDate == 'ASAP' || properties.itemDate == 'Done')){
+        document.getElementById(properties.itemDate).checked = true;
+        checkboxDate(properties.itemDate);
+      }
+      
+      
+      //document.getElementById('itemLeadStaff').value = properties.itemLeadStaff;      
+       console.log('properties.itemLeadStaff: ' + properties.itemLeadStaff);
       
       
       
@@ -258,12 +269,13 @@
          
       // Get the checkbox
       var dateDone = document.getElementById(name);
-      var inputNames = ['Done','Asap','itemDate'];
+      var inputNames = ['Done','ASAP','itemDate'];
       
       // If the checkbox is checked, toggle
       if (dateDone.checked == true){
         inputNames.forEach((element) => {
           console.log("element: "+ element);
+          console.log("name: "+ name);
           //grey out the other options for date if checked
           if(element != name){
             document.getElementById(element).disabled = true;

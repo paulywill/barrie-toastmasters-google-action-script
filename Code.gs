@@ -104,12 +104,12 @@ function submitItem(form) {
   Logger.log('submitItem');  
   var properties = getAllProperties();
   let doc = DocumentApp.getActiveDocument().getBody();
-  var inputNames = ['Done','Asap'];  
+  var inputNames = ['Done','ASAP'];  
   let itemDateOption;
   
   Logger.log('properties.itemDate: ' + properties.itemDate);
   
-  if(properties.itemDate == 'Done' || 'Asap'){
+  if(properties.itemDate == 'Done' || 'ASAP'){
     Logger.log("There's a match.");
     itemDateOption = properties.itemDate;
   }else{
@@ -219,13 +219,13 @@ function itemInput(form) {
   sp.setProperty('itemPoints', form.itemPoints);
   sp.setProperty('itemAction', form.itemAction); 
    
-  //logic for if the 'Done' or 'Asap' checkboxes are selected instead of date input
+  //logic for if the 'Done' or 'ASAP' checkboxes are selected instead of date input
   
-  if(form.DoneHidden == 'true' | form.AsapHidden == 'true'){
+  if(form.DoneHidden == 'true' | form.ASAPHidden == 'true'){
     if(form.DoneHidden == 'true'){
       sp.setProperty('itemDate', 'Done');   
-    } else if(form.AsapHidden == 'true'){
-      sp.setProperty('itemDate', 'Asap');
+    } else if(form.ASAPHidden == 'true'){
+      sp.setProperty('itemDate', 'ASAP');
     }  
   } else{
     sp.setProperty('itemDate', form.itemDate);   
