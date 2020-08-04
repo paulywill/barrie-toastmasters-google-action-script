@@ -88,19 +88,22 @@
       <form>
         <h3>Executive Roles</h3>
         <div class="dataInputRoles">
-          <div><label for="prez"><input class="emailButton" type="button" value="✉️" onclick="" />President: </label></div>
+          <!-- ===================================================== -->        
+          <!-- Hard coded 2 values that are passed to email function -->
+          <!-- ===================================================== -->
+          <div><label for="prez"><input class="emailButton" type="button" value="✉️" onclick="google.script.run.showEmailDialog('settingRole1', 'President')" />President: </label></div>
           <div><input type="text" id="settingRole1" name="settingRole1" size="18"></div>
-          <div><label for="vpedu"><input class="emailButton" type="button" value="✉️" onclick="" />VP of Edu: </label></div>
+          <div><label for="vpedu"><input class="emailButton" type="button" value="✉️" onclick="google.script.run.showEmailDialog('settingRole2', 'VP of Edu.')" />VP of Edu: </label></div>
           <div><input type="text" id="settingRole2" name="settingRole2" size="18"></div>
-          <div><label for="vpmem"><input class="emailButton" type="button" value="✉️" onclick="" />VP of Mem: </label></div>
+          <div><label for="vpmem"><input class="emailButton" type="button" value="✉️" onclick="google.script.run.showEmailDialog('settingRole3', 'VP of Mem.')" />VP of Mem: </label></div>
           <div><input type="text" id="settingRole3" name="settingRole3" size="18"></div>
-          <div><label for="vppr"><input class="emailButton" type="button" value="✉️" onclick="" />VP of PR: </label></div>
+          <div><label for="vppr"><input class="emailButton" type="button" value="✉️" onclick="google.script.run.showEmailDialog('settingRole4', 'VP of PR')" />VP of PR: </label></div>
           <div><input type="text" id="settingRole4" name="settingRole4" size="18"></div>
-          <div><label for="tres"><input class="emailButton" type="button" value="✉️" onclick="" />Treasurer: </label></div>
+          <div><label for="tres"><input class="emailButton" type="button" value="✉️" onclick="google.script.run.showEmailDialog('settingRole5', 'Treasurer')" />Treasurer: </label></div>
           <div><input type="text" id="settingRole5" name="settingRole5" size="18"></div>
-          <div><label for="saa"><input class="emailButton" type="button" value="✉️" onclick="" />SAA: </label></div>
+          <div><label for="saa"><input class="emailButton" type="button" value="✉️" onclick="google.script.run.showEmailDialog('settingRole6', 'Sgt. at Arms')" />SAA: </label></div>
           <div><input type="text" id="settingRole6" name="settingRole6" size="18"></div>
-          <div><label for="sec"><input class="emailButton" type="button" value="✉️" onclick="" />Secretary: </label></div>
+          <div><label for="sec"><input class="emailButton" type="button" value="✉️" onclick="google.script.run.showEmailDialog('settingRole7', 'Secretary')" />Secretary: </label></div>
           <div><input type="text" id="settingRole7" name="settingRole7" size="18"></div>       
         </div>
         <h3>Meeting Locations</h3>
@@ -129,12 +132,15 @@
           <input type="text" id="settingMeetingTitle" name="settingMeetingTitle"><br>
         </div>
         -->
+     
+        <div id="submitButton"></div>
+        <div>
+          <input class="Button" type="button" value="Save" onclick="formSubmit()" />
+          <!-- <input class="Button" type="button" value="Email PDF Copy" onclick="google.script.run.showEmailDialog()" /> -->
+          <input class="Button" type="button" value="Email PDF" onclick="" />
+        </div>    
       </form> 
-      <div id="submitButton"></div>
-      <p>
-        <input class="Button" type="button" value="Save" onclick="formSubmit()" />
-        <input class="Button" type="button" value="Email PDF Copy" onclick="google.script.run.showEmailDialog()" />
-      </p>     
+      
       <p>
         <input type="button" value="Details" onclick="google.script.run.showDetails()" />
         <input type="button" value="Item/Tasks" onclick="google.script.run.showTasks()" />

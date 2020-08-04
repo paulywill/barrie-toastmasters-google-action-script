@@ -2,10 +2,176 @@
 <html>
   <head>
     <base target="_top">
+    <style>
+      
+      html {     
+        line-height: 1.5;
+        font-family: Verdana;
+      }
+ 
+      output {  
+        font-family: Helvetica Neue,Helvetica,Arial,sans-serif; 
+      }
+      
+      div {
+        padding: 5px;
+      }
+      
+      input[type=email]{
+        width:300px;
+      }
+      
+      
+      input:required {
+        color: red;
+      }
+      
+      .form input:required,
+      textarea:required {
+        border-color: green !important;
+      }
+      
+      .form input:invalid,
+      textarea:invalid {
+        border-color: red !important;
+      }
+     
+      label.disabled { 
+        color: #D3D3D3; 
+      }
+      
+      label.enabled { 
+        color: #000000; 
+      }
+      
+      span.red {
+        color: red;
+      }
+        
+      .box {
+        display: flex;
+        flex-wrap: wrap;       
+      }
+      
+      .box-inner {
+        display: flex;
+        flex-wrap: wrap;
+        align-content: space-between;
+        padding: 5px;
+               
+      }
+       
+      .button {
+        background-color: #2980B9;
+        border: none;
+        border-radius: 15px;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+      }
+      
+      .center {
+        margin: auto;
+        width: 60%;
+        padding: 10px;
+      }
+      
+      .control-panel{
+         margin: auto; text-align: center; 
+      }
+       
+      .dataInput {
+        background: #f1f2ee;
+        padding: 15px;
+        border-radius: 15px;
+        margin: 5px;
+        border-style: solid;
+        border-width: 2px;
+        border-color: #c3d5d8;
+      }
+      
+      .flex-inner {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        padding: 5px;
+      }
+       
+      .messageOutput {
+        background: #00FA9A;
+        padding: 5px;
+        border-radius: 15px;
+        margin: 5px;
+        border-style: solid;
+        border-width: 2px;
+        border-color: #c3d5d8;
+        margin: auto; text-align: center;
+      }
+       
+      .push {
+        margin-left: 25px;;
+      }
+      
+      .tiny-message {
+        margin-left: 300px;
+        font-size: small; 
+        text-align: right;
+      }
+           
+    </style>
   </head>
   <body>
-    
+    <div> 
+        <form class="form" id="itemForm">
+          <div class="center">  
+            <div><label>Role:</label><div id='role' name='role'></div></div>
+            <div><label>Name:</label><div id='name' name='name'></div></div>
+            <div>
+              <label for="emailAddress">Email address<span class="red">*</span>:</label><br>
+              <input type="email" id="emailAddress" name="emailAddress" required><br>
+            </div>
+          </div>
+          <div id="submitButton"></div>
+          <div class="center">  
+            <input class="button" onclick="formSubmit()" type="button" value="Submit" id="submit" />
+            <input class="button" onclick="google.script.host.close()" type="button" value="Close" id="close" />     
+          </div>
+        </form>
+        
+     </div>
   </body>
+  <!--------------------------------- Code ------------------------------------------->
+  <script type="text/javascript">  
+  
+  //runs automatically on load
+    google.script.run.withSuccessHandler(updateFormValues).getAllProperties();
+    
+    
+    // ------------------------- Updating Form Values ---------------------------------
+    function updateFormValues(properties) {
+      document.getElementById("name").innerHTML = properties[properties.emailSettingOpen];
+      document.getElementById("role").innerHTML = properties.emailSettingTitle;
+      document.getElementById('emailAddress').value = properties[properties.emailSettingOpen+'Email'];
+    }
+    
+    // ------------------------- Submit Form Values ------------------------------------
+    function formSubmit() {
+      google.script.run.emailInput(document.forms[0]);
+      document.getElementById('submitButton').innerHTML = "<div class='messageOutput'>Saved</div>";
+      google.script.run.withSuccessHandler(hideSaved).waitSeconds();  
+    }
+    
+    // ------------------------- Hide message box ---------------------------------------
+    function hideSaved() {
+      document.getElementById('submitButton').innerHTML = "";
+    }
+  </script>
+  
 </html>
 
 

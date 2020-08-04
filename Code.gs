@@ -205,6 +205,32 @@ function settingsInput(form) {
   }  
 }
 
+
+// ------------------------ Test Email Settings  -----------------------
+/*function testEmailSettings() {
+  Logger.log('testEmailSettings');
+  var properties = getAllProperties();
+  
+  //loop through and save all names for roles
+  for (i = 1; i < 8; i++){
+    Logger.log(properties['settingRole' + i] + ': ' + properties['settingRole' + i + 'Email']);       
+  }
+  
+  
+}
+*/
+
+// ------------------------ Email Settings  -----------------------
+function emailInput(form) {
+  Logger.log('emailInput');
+  Logger.log('form.emailAddress: '+ form.emailAddress);
+  var properties = getAllProperties();     
+  var roleEmail = properties.emailSettingOpen+'Email';
+  Logger.log('roleEmail: '+ roleEmail);
+  sp.setProperty(roleEmail,form.emailAddress);
+  
+}
+
 // ------------------------ Save Item Details --------------------
 function itemInput(form) {
   Logger.log('itemInput');
@@ -251,7 +277,7 @@ function getAllProperties() {
   var data = sp.getProperties();
   for (var key in data) {
     propertiesAndKeys[key] = sp.getProperty(key);
-    // Logger.log('Key: %s - %s', key, data[key]);
+    //Logger.log('Key: %s - %s', key, data[key]);
   }
   return propertiesAndKeys;
 }
@@ -284,17 +310,29 @@ function showTaskDialog() {
 }
 
 
-// --------------- Open Item/Tasks Popup Dialog  ------------------------
-function showEmailDialog() {
+// --------------- Open Email Popup Dialog  ----------------------------
+function showEmailDialog(emailRole, roleTitle) {
+  
+  //TESTING ---> some refactoring required 
+  
+  Logger.log('showEmailDialog(emailRole): '+ emailRole);
+  Logger.log('showEmailDialog(roleTitle): '+ roleTitle);
+  sp.setProperty('emailSettingOpen', emailRole);
+  sp.setProperty('emailSettingTitle', roleTitle);
+  
   var html = HtmlService.createHtmlOutputFromFile('emailDialog')
       .setWidth(500)
       .setHeight(300);
   DocumentApp.getUi() // Or DocumentApp or SlidesApp or FormApp.
-      .showModalDialog(html, 'Email PDF Copy');
+      .showModalDialog(html, 'Email setting');
 }
 
 // --------------- Show Settings Sidebar  -------------------------------
 function showSettings() {
+  
+  //TESTING: email settings
+  //testEmailSettings();
+  
   var html = HtmlService.createHtmlOutputFromFile('settingsSidebar')
       .setTitle('Settings')
       .setWidth(550);
