@@ -183,9 +183,9 @@
     // ------------------------- Updating Form Values ---------------
     function updateFormValues(properties) {
      
-      document.getElementById('itemTitle').value = properties.itemTitle;
-      document.getElementById('itemPoints').value = properties.itemPoints;
-      document.getElementById('itemAction').value = properties.itemAction;
+      //document.getElementById('itemTitle').value = properties.itemTitle;
+      //document.getElementById('itemPoints').value = properties.itemPoints;
+      //document.getElementById('itemAction').value = properties.itemAction;
        
       var selectLeadStaff = document.getElementById("itemLeadStaff");
       //based on the 7 Executive Roles
@@ -198,7 +198,8 @@
         selectLeadStaff.appendChild(elRole);      
       }    
       
-      //document.getElementById('itemDate').value = properties.itemDate;
+      /*
+      document.getElementById('itemDate').value = properties.itemDate;
       if((properties.itemDate == 'ASAP' || properties.itemDate == 'Done')){
         document.getElementById(properties.itemDate).checked = true;
         checkboxDate(properties.itemDate);
@@ -219,6 +220,8 @@
             }
           });      
        }
+       
+       */
     }
       
     // ------------------------  Submitting Form  --------------------  
