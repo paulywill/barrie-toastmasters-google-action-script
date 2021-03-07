@@ -12,6 +12,13 @@
 
 //GLOBAL VARIABLES
 var sp = PropertiesService.getScriptProperties();
+var headers = Sheets.Spreadsheets.Values.get('1ldvFVn7wGK0ccafr6bv7-mYjn_GyUuDuwI8o5U_KNFg', 'A1:C1');
+var data = Sheets.Spreadsheets.Values.get('1ldvFVn7wGK0ccafr6bv7-mYjn_GyUuDuwI8o5U_KNFg', 'A2:C8');
+Logger.log(headers);
+Logger.log(data);
+
+
+
 
 // ------------------------ Replace Placeholders  -----------------------
 function replaceText(){  
