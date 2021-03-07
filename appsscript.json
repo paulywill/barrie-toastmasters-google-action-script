@@ -7,14 +7,6 @@
         "version": "v4",
         "serviceId": "sheets"
       }
-    ],
-    "libraries": [
-      {
-        "userSymbol": "BTM_settings",
-        "version": "0",
-        "libraryId": "1qO4dJW8vQisnEZ3FjpDw9XIbSf0uPlVe_dr2AqcgEGdUlTbMB_g-kqId",
-        "developmentMode": true
-      }
     ]
   },
   "exceptionLogging": "STACKDRIVER",
